@@ -131,6 +131,7 @@ input[type="date"]:focus{border-color:var(--green)}input[type="date"]::-webkit-c
 .det-acts{display:flex;gap:8px}
 .notif{position:fixed;bottom:22px;right:22px;background:var(--bg2);border:1px solid var(--green);border-radius:var(--r);padding:11px 16px;font-size:13px;color:var(--green);font-weight:500;display:flex;align-items:center;gap:10px;transform:translateY(80px);opacity:0;transition:all .3s ease;z-index:9999;box-shadow:0 0 20px rgba(63,185,80,.2)}
 .notif.show{transform:translateY(0);opacity:1}
+.row-input::-webkit-calendar-picker-indicator{display:none !important}
 @media print{body{background:#fff!important;color:#000!important}.sidebar,.topbar,.form-side,.act-btns,.wa-cfg,.prev-hdr,.notif{display:none!important}.main{margin-left:0!important}.dash-grid{display:block!important}.preview-side{padding:20px!important}.prev-box{background:#fff!important;color:#000!important;border:1px solid #ccc!important;max-height:none!important}.prev-box span{color:#000!important}}
 </style>
 </head>
@@ -347,12 +348,36 @@ function updateClock(){
 document.getElementById('tanggal').addEventListener('change',e=>{document.getElementById('tglFmt').textContent=fmtDate(e.target.value)||'—';autoUpdate();});
 
 function getRows(s){return Array.from(document.getElementById(s+'-rows').querySelectorAll('.row-item')).map(r=>{const inp=r.querySelectorAll('input');return{col1:inp[0]?.value.trim()||'',col2:inp[1]?.value.trim()||''};});}
+function buildDatalist(){
+  let dl=document.getElementById('personil-datalist');
+  if(!dl){dl=document.createElement('datalist');dl.id='personil-datalist';document.body.appendChild(dl);}
+  dl.innerHTML='';
+  const aktif=personilList.filter(p=>p.status==='aktif'||!p.status);
+  aktif.forEach(p=>{const opt=document.createElement('option');opt.value=p.nama;opt.setAttribute('data-lokasi',p.lokasi||'');dl.appendChild(opt);});
+}
 function addRow(s,c1='',c2=''){
   const cont=document.getElementById(s+'-rows');const d=document.createElement('div');d.className='row-item';
   const p1=s==='report'?'Kegiatan':'Nama Personil';
   const p2=s==='masuk'?'Keterangan':s==='patroli'?'Patroli Malam':s==='off'?'Off':'PIC';
-  d.innerHTML=`<input type="text" class="row-input" placeholder="${p1}" value="${c1}" oninput="autoUpdate()"><input type="text" class="row-input" placeholder="${p2}" value="${c2}" oninput="autoUpdate()"><button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+  const listAttr=s!=='report'?'list="personil-datalist"':'';
+  d.innerHTML=`<input type="text" class="row-input" placeholder="${p1}" value="${c1}" ${listAttr} oninput="onNamaInput(this,'${s}')" onchange="onNamaChange(this,'${s}')"><input type="text" class="row-input" placeholder="${p2}" value="${c2}" oninput="autoUpdate()"><button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
   cont.appendChild(d);updateStats();autoUpdate();
+}
+function onNamaInput(el,s){autoUpdate();}
+function onNamaChange(el,s){
+  // Saat nama dipilih dari dropdown, auto isi keterangan jika kosong
+  const nama=el.value.trim();
+  const personil=personilList.find(p=>p.nama.toLowerCase()===nama.toLowerCase());
+  if(personil){
+    const row=el.closest('.row-item');
+    const inp2=row.querySelectorAll('input')[1];
+    if(!inp2.value.trim()){
+      if(s==='masuk')inp2.value=personil.lokasi?`Standby di ${personil.lokasi}`:'Standby';
+      else if(s==='patroli')inp2.value=personil.shift==='Malam'?'Patroli Malam':'Standby';
+      else if(s==='off')inp2.value='Off';
+    }
+  }
+  autoUpdate();
 }
 function delRow(btn){btn.closest('.row-item').remove();updateStats();autoUpdate();}
 function updateStats(){
@@ -466,7 +491,7 @@ function salinDetail(){copyText(arsip[detailIdx].laporan,()=>showNotif('Tersalin
 // PERSONIL
 function getInitial(n){return(n||'?').split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';}
 function getColor(n){let h=0;for(let c of(n||''))h=(h*31+c.charCodeAt(0))%COLORS.length;return COLORS[h];}
-function savePersonilData(){try{localStorage.setItem('personilList',JSON.stringify(personilList));}catch(e){}}
+function savePersonilData(){try{localStorage.setItem('personilList',JSON.stringify(personilList));}catch(e){}buildDatalist();}
 function renderPersonil(){
   const q=(document.getElementById('persFilter').value||'').toLowerCase();
   const st=document.getElementById('persStatus').value;
@@ -534,13 +559,31 @@ function showNotif(msg,type='green'){
 }
 
 // INIT
+buildDatalist();
 initDate();
-addRow('masuk','Aprilio Parsaoran','Standby di CLS Manado Minahasa');
-addRow('masuk','Rivaldy Kawengian','Standby di CLS Manado Minahasa');
-addRow('masuk','Djetly Sambuni','Standby di CLS Manado Minahasa');
-addRow('patroli','Scivo Kategu','Patroli Malam');addRow('patroli','Ikadek Agus','Standby');
-addRow('off','','');
-addRow('report','Daily Report','Rivaldy Kawengian');addRow('report','NCR Daily','Rivaldy Kawengian');addRow('report','Morning Briefing','Rivaldy Kawengian');
+
+// Auto-isi baris dari personil aktif, atau fallback ke default jika personilList kosong
+function initDefaultRows(){
+  const aktif=personilList.filter(p=>p.status==='aktif'||!p.status);
+  if(aktif.length){
+    aktif.forEach(p=>{
+      const ket=p.lokasi?`Standby di ${p.lokasi}`:'Standby';
+      addRow('masuk',p.nama,ket);
+    });
+    addRow('off','','');
+    addRow('report','Daily Report',aktif[0]?.nama||'');
+    addRow('report','NCR Daily',aktif[0]?.nama||'');
+    addRow('report','Morning Briefing',aktif[0]?.nama||'');
+  } else {
+    addRow('masuk','Aprilio Parsaoran','Standby di CLS Manado Minahasa');
+    addRow('masuk','Rivaldy Kawengian','Standby di CLS Manado Minahasa');
+    addRow('masuk','Djetly Sambuni','Standby di CLS Manado Minahasa');
+    addRow('patroli','Scivo Kategu','Patroli Malam');addRow('patroli','Ikadek Agus','Standby');
+    addRow('off','','');
+    addRow('report','Daily Report','Rivaldy Kawengian');addRow('report','NCR Daily','Rivaldy Kawengian');addRow('report','Morning Briefing','Rivaldy Kawengian');
+  }
+}
+initDefaultRows();
 updateStats();
 
 if(!personilList.length){
