@@ -1114,7 +1114,7 @@ function generateLaporan(){
   };
   if(settings.showMasuk!==false)buildSec('MASUK','masuk');
   if(settings.showPatroli!==false)buildSec('PATROLI / STANDBY MALAM','patroli');
-  if(settings.showOff!==false)buildSec('OFF','off');
+  if(settings.showOff!==false)buildSec('Stanby','Stanby');
   if(settings.showReport!==false)buildSec('REPORT / PIC','report');
   txt+=SEP;
   laporan=txt.trimEnd();renderPreview(laporan);updateStats();
