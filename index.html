@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patrol Report — v4</title>
+<title>Jadwal Harian </title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
@@ -211,6 +210,8 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
 .row-input{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:var(--font-main);font-size:12px;padding:8px 10px;outline:none;transition:border .2s,background .2s;width:100%}
 .row-input:focus{border-color:var(--border2);background:var(--bg4)}
 .row-input::placeholder{color:var(--dim)}
+.row-select{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:var(--font-main);font-size:12px;padding:8px 10px;outline:none;transition:border .2s,background .2s;width:100%;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a8aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.row-select:focus{border-color:var(--border2);background-color:var(--bg4)}
 .del-btn{width:30px;height:30px;border-radius:6px;background:transparent;border:1px solid var(--border);color:var(--dim);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s;flex-shrink:0}
 .del-btn:hover{background:var(--red-d);border-color:var(--red);color:var(--red);transform:scale(1.05)}
 .add-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;width:100%;background:transparent;border:1px dashed var(--border2);border-radius:var(--rs);color:var(--green);font-family:var(--font-main);font-size:12px;font-weight:500;cursor:pointer;transition:all .18s;margin-top:4px}
@@ -290,7 +291,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
 .pc-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .pc-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;font-family:var(--font-display)}
 .pc-name{font-size:13px;font-weight:600;color:var(--text)}
-.pc-jabatan{font-size:11px;color:var(--muted)}
+.pc-team{font-size:11px;color:var(--muted)}
 .pc-info{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
 .pc-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
 .pc-row i{width:14px;text-align:center;font-size:10px;color:var(--dim)}
@@ -363,6 +364,10 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
 .notif.show{transform:translateX(0);opacity:1}
 .notif-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 
+/* LOKASI HINT */
+.lokasi-hint{font-size:10px;color:var(--dim);margin-top:5px;display:flex;align-items:center;gap:4px}
+.lokasi-hint i{font-size:9px;color:var(--green)}
+
 /* RESPONSIVE */
 @media(max-width:900px){
   .dash-grid{grid-template-columns:1fr}
@@ -408,8 +413,8 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
     <div class="login-brand">
       <div class="login-brand-icon"><i class="fas fa-shield-halved"></i></div>
       <div>
-        <div class="login-brand-name">Patrol Report</div>
-        <div class="login-brand-sub">Management System v4.0</div>
+        <div class="login-brand-name">Jadwal Harian</div>
+        <div class="login-brand-sub">Management System v5.0</div>
       </div>
     </div>
 
@@ -452,7 +457,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
       <span class="btn-login-txt"><i class="fas fa-right-to-bracket"></i> &nbsp;Masuk</span>
     </button>
 
-    <div class="login-footer">Patrol Report &copy; 2025 &mdash; Network Indonesia Timur</div>
+    <div class="login-footer">Jadwal harian &copy; 2025 &mdash; Network Indonesia Timur</div>
   </div>
 </div>
 
@@ -464,7 +469,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
   <div class="s-logo">
     <div class="s-icon"><i class="fas fa-shield-halved"></i></div>
     <div class="s-texts">
-      <div class="s-title">Patrol Report</div>
+      <div class="s-title">Jadwal harian</div>
       <div class="s-sub">Management System</div>
     </div>
   </div>
@@ -497,7 +502,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
         <div class="u-role" id="sideRole">Administrator</div>
       </div>
     </div>
-    <div class="u-ver">Versi 4.0.0 &copy; 2025</div>
+    <div class="u-ver">Versi 5.0.0 &copy; 2025</div>
   </div>
 </aside>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
@@ -586,7 +591,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
             <span class="sec-count" id="cnt-masuk">0 orang</span>
           </div>
           <div class="sec-body">
-            <div class="tbl-hdr"><span>Nama</span><span>Keterangan</span><span></span></div>
+            <div class="tbl-hdr"><span>Nama</span><span>Lokasi</span><span></span></div>
             <div id="masuk-rows"></div>
             <button class="add-btn" onclick="addRow('masuk')"><i class="fas fa-plus"></i> Tambah Personil</button>
           </div>
@@ -600,7 +605,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
             <span class="sec-count" id="cnt-patroli">0 orang</span>
           </div>
           <div class="sec-body">
-            <div class="tbl-hdr"><span>Nama</span><span>Keterangan</span><span></span></div>
+            <div class="tbl-hdr"><span>Nama</span><span>Lokasi Patroli</span><span></span></div>
             <div id="patroli-rows"></div>
             <button class="add-btn" onclick="addRow('patroli')"><i class="fas fa-plus"></i> Tambah Personil</button>
           </div>
@@ -707,6 +712,11 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
       </div>
       <div class="filter-row">
         <input type="text" class="filter-inp" id="persFilter" placeholder="🔍 Cari nama / team..." oninput="renderPersonil()" style="flex:1;min-width:140px">
+        <select class="filter-inp" id="persTeam" onchange="renderPersonil()" style="width:180px;cursor:pointer">
+          <option value="">Semua Team</option>
+          <option value="Field Engineer">Field Engineer</option>
+          <option value="Team Patroli">Team Patroli</option>
+        </select>
         <select class="filter-inp" id="persStatus" onchange="renderPersonil()" style="width:150px;cursor:pointer">
           <option value="">Semua Status</option>
           <option value="aktif">Aktif</option>
@@ -781,7 +791,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
           <div class="sett-section">
             <div class="sett-sec-title">Tentang Aplikasi</div>
             <div class="sett-card">
-              <div class="sett-row"><div class="sett-row-lbl">Versi</div><span style="font-size:12px;color:var(--muted)">4.0.0</span></div>
+              <div class="sett-row"><div class="sett-row-lbl">Versi</div><span style="font-size:12px;color:var(--muted)">5.0.0</span></div>
               <div class="sett-row"><div class="sett-row-lbl">Platform</div><span style="font-size:12px;color:var(--muted)">Web App (HTML5)</span></div>
               <div class="sett-row"><div class="sett-row-lbl">Total Laporan</div><span style="font-size:12px;color:var(--green)" id="info-total-lap">0</span></div>
               <div class="sett-row"><div class="sett-row-lbl">Total Personil</div><span style="font-size:12px;color:var(--blue)" id="info-total-pers">0</span></div>
@@ -807,16 +817,22 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
         <div class="form-grp"><label class="form-lbl">Nama Lengkap *</label><input class="form-inp" id="p-nama" placeholder="Nama personil"></div>
         <div class="form-grp"><label class="form-lbl">No. HP</label><input class="form-inp" id="p-hp" placeholder="081234567890"></div>
       </div>
-      <div class="form-grp"><label class="form-lbl">Team *</label>
-        <select class="form-inp form-select" id="p-team">
+      <div class="form-grp">
+        <label class="form-lbl">Team *</label>
+        <select class="form-inp form-select" id="p-team" onchange="onTeamChange()">
           <option value="Field Engineer">Field Engineer</option>
           <option value="Team Patroli">Team Patroli</option>
         </select>
       </div>
-      <div class="form-grp"><label class="form-lbl">Lokasi Penempatan</label>
-        <input class="form-inp" id="p-lokasi" value="Network Indonesia Timur" readonly>
+      <div class="form-grp">
+        <label class="form-lbl">Lokasi Penempatan</label>
+        <select class="form-inp form-select" id="p-lokasi">
+          <!-- Diisi dinamis berdasarkan team -->
+        </select>
+        <div class="lokasi-hint"><i class="fas fa-circle-check"></i> Lokasi otomatis sesuai team yang dipilih</div>
       </div>
-      <div class="form-grp"><label class="form-lbl">Status</label>
+      <div class="form-grp">
+        <label class="form-lbl">Status</label>
         <select class="form-inp form-select" id="p-status">
           <option value="aktif">Aktif</option>
           <option value="nonaktif">Non-aktif</option>
@@ -897,7 +913,24 @@ const DAYS=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 const MON=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 const COLORS=['#00d97e','#4d9fff','#a78bfa','#f5a623','#ff5f5f','#22d3ee','#f0883e'];
 
-// Akun pengguna — ubah sesuai kebutuhan
+// Lokasi opsi per team
+const LOKASI_FIELD_ENGINEER = [
+  'CLS Manado-Minahasa',
+  'CLS Kauditan',
+  'Piket Malam',
+  'Stanby',
+  'Network Indonesia Timur'
+];
+
+const LOKASI_TEAM_PATROLI = [
+  'Patroli Minahasa Utara',
+  'Patroli Manado',
+  'Piket Malam',
+  'Stanby CLS Manado-Minahasa',
+  'Stanby'
+];
+
+// Akun pengguna
 const APP_USERS=[
   {username:'admin',     password:'admin123',  name:'Administrator', role:'Administrator'},
   {username:'supervisor',password:'super123',  name:'Supervisor',    role:'Supervisor'},
@@ -926,6 +959,24 @@ function applyTheme(){
 function toggleTheme(){isDark=!isDark;settings.isDark=isDark;saveSettings();applyTheme();}
 function toggleThemeFromSett(){isDark=document.getElementById('set-dark').checked;settings.isDark=isDark;saveSettings();applyTheme();}
 applyTheme();
+
+/* ===================== LOKASI TEAM HELPER ===================== */
+function getLokasiOptions(team){
+  return team==='Team Patroli' ? LOKASI_TEAM_PATROLI : LOKASI_FIELD_ENGINEER;
+}
+
+function buildLokasiSelect(team, selectedVal=''){
+  const opts = getLokasiOptions(team);
+  return opts.map(o=>`<option value="${o}"${o===selectedVal?' selected':''}>${o}</option>`).join('');
+}
+
+// Dipanggil saat team berubah di modal
+function onTeamChange(){
+  const team = document.getElementById('p-team').value;
+  const sel = document.getElementById('p-lokasi');
+  const opts = getLokasiOptions(team);
+  sel.innerHTML = buildLokasiSelect(team, opts[0]);
+}
 
 /* ===================== LOGIN ===================== */
 function togglePass(){
@@ -959,7 +1010,6 @@ function doLogin(){
       document.getElementById('loginPass').focus();
       return;
     }
-    // Simpan session
     try{sessionStorage.setItem('loggedUser',JSON.stringify(user));}catch(e){}
     if(document.getElementById('rememberMe').checked){
       try{localStorage.setItem('rememberedUser',u);}catch(e){}
@@ -972,7 +1022,6 @@ function enterApp(user){
   document.getElementById('loginPage').style.display='none';
   const app=document.getElementById('appWrap');
   app.style.display='flex';
-  // Set user info di sidebar
   document.getElementById('sideName').textContent=user.name;
   document.getElementById('sideRole').textContent=user.role;
   document.getElementById('sideAva').textContent=getInitial(user.name);
@@ -1007,13 +1056,11 @@ function submitForgot(){
   showNotif('Permintaan reset dikirim untuk "'+u+'"','green');
 }
 
-// Cek session saat load
 (function checkSession(){
   try{
     const saved=JSON.parse(sessionStorage.getItem('loggedUser')||'null');
     if(saved){enterApp(saved);return;}
   }catch(e){}
-  // Isi username jika ingat
   try{
     const rem=localStorage.getItem('rememberedUser');
     if(rem)document.getElementById('loginUser').value=rem;
@@ -1099,10 +1146,11 @@ function goSett(id,el){
 /* ===================== ROWS ===================== */
 function getRows(s){
   return Array.from(document.getElementById(s+'-rows').querySelectorAll('.row-item')).map(r=>{
-    const inp=r.querySelectorAll('input');
-    return{col1:(inp[0]?.value||'').trim(),col2:(inp[1]?.value||'').trim()};
+    const inputs=r.querySelectorAll('input,select');
+    return{col1:(inputs[0]?.value||'').trim(),col2:(inputs[1]?.value||'').trim()};
   });
 }
+
 function buildDatalist(){
   let dl=document.getElementById('personil-datalist');
   if(!dl){dl=document.createElement('datalist');dl.id='personil-datalist';document.body.appendChild(dl);}
@@ -1111,33 +1159,67 @@ function buildDatalist(){
     const o=document.createElement('option');o.value=p.nama;dl.appendChild(o);
   });
 }
+
 function esc(s){return(s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+
+function getPersonilTeam(nama){
+  const p=personilList.find(p=>p.nama.toLowerCase()===nama.toLowerCase());
+  return p?p.team:'Field Engineer';
+}
+
+function buildLokasiSelectHTML(team, selectedVal=''){
+  const opts = getLokasiOptions(team);
+  const sel = selectedVal || opts[0];
+  return opts.map(o=>`<option value="${esc(o)}"${o===sel?' selected':''}>${o}</option>`).join('');
+}
+
 function addRow(s,c1='',c2=''){
   const cont=document.getElementById(s+'-rows');
   const d=document.createElement('div');d.className='row-item';
   const p1=s==='report'?'Kegiatan':'Nama Personil';
-  const p2=s==='masuk'?'Keterangan':s==='patroli'?'Patroli Malam':s==='off'?'Off':'PIC';
-  const listAttr=s!=='report'?'list="personil-datalist"':'';
-  d.innerHTML='<input type="text" class="row-input" placeholder="'+p1+'" value="'+esc(c1)+'" '+listAttr+' oninput="onInputChange()" onchange="onNamaChange(this,\''+s+'\')">'
-    +'<input type="text" class="row-input" placeholder="'+p2+'" value="'+esc(c2)+'" oninput="onInputChange()">'
-    +'<button class="del-btn" onclick="delRow(this)" title="Hapus"><i class="fas fa-trash-can"></i></button>';
+
+  if(s==='masuk'||s==='patroli'){
+    // Tentukan team berdasarkan nama (jika ada) atau default
+    const team = c1 ? getPersonilTeam(c1) : (s==='patroli'?'Team Patroli':'Field Engineer');
+    const lokasiOpts = buildLokasiSelectHTML(team, c2);
+    d.innerHTML=`<input type="text" class="row-input" placeholder="${p1}" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()" onchange="onNamaChange(this,'${s}')">`
+      +`<select class="row-select" oninput="onInputChange()">${lokasiOpts}</select>`
+      +`<button class="del-btn" onclick="delRow(this)" title="Hapus"><i class="fas fa-trash-can"></i></button>`;
+  } else if(s==='off'){
+    d.innerHTML=`<input type="text" class="row-input" placeholder="${p1}" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()">`
+      +`<input type="text" class="row-input" placeholder="Keterangan" value="${esc(c2)}" oninput="onInputChange()">`
+      +`<button class="del-btn" onclick="delRow(this)" title="Hapus"><i class="fas fa-trash-can"></i></button>`;
+  } else {
+    // report
+    d.innerHTML=`<input type="text" class="row-input" placeholder="Kegiatan" value="${esc(c1)}" oninput="onInputChange()">`
+      +`<input type="text" class="row-input" placeholder="PIC" value="${esc(c2)}" oninput="onInputChange()">`
+      +`<button class="del-btn" onclick="delRow(this)" title="Hapus"><i class="fas fa-trash-can"></i></button>`;
+  }
   cont.appendChild(d);
   updateStats();scheduleAutosave();
 }
+
 function onInputChange(){updateStats();scheduleAutosave();}
+
 function onNamaChange(el,s){
   const nama=el.value.trim();
   const p=personilList.find(p=>p.nama.toLowerCase()===nama.toLowerCase());
+  const rowItem=el.closest('.row-item');
+  const sel=rowItem.querySelector('select.row-select');
+  if(!sel)return;
+  const team = p ? p.team : (s==='patroli'?'Team Patroli':'Field Engineer');
+  const opts = getLokasiOptions(team);
+  // Simpan nilai lama
+  const oldVal = sel.value;
+  sel.innerHTML = opts.map(o=>`<option value="${esc(o)}"${o===oldVal?' selected':''}>${o}</option>`).join('');
+  // Jika nama ditemukan dan lokasi belum dipilih custom (atau masih default lama), set default baru
   if(p){
-    const inp2=el.closest('.row-item').querySelectorAll('input')[1];
-    if(!inp2.value.trim()){
-      if(s==='masuk')inp2.value='Standby di '+(p.lokasi||'Network Indonesia Timur');
-      else if(s==='patroli')inp2.value=p.team==='Team Patroli'?'Patroli Malam':'Standby';
-      else if(s==='off')inp2.value='Off';
-    }
+    const defaultLokasi = p.lokasi && opts.includes(p.lokasi) ? p.lokasi : opts[0];
+    if(!opts.includes(oldVal)) sel.value = defaultLokasi;
   }
   onInputChange();
 }
+
 function delRow(btn){btn.closest('.row-item').remove();updateStats();scheduleAutosave();}
 
 /* ===================== STATS ===================== */
@@ -1276,18 +1358,18 @@ function loadDraft(){
 function loadDefaults(){
   const aktif=personilList.filter(p=>p.status==='aktif'||!p.status);
   if(aktif.length){
-    aktif.filter(p=>p.team==='Field Engineer').forEach(p=>addRow('masuk',p.nama,'Standby di '+(p.lokasi||'Network Indonesia Timur')));
-    aktif.filter(p=>p.team==='Team Patroli').forEach(p=>addRow('patroli',p.nama,'Patroli Malam'));
+    aktif.filter(p=>p.team==='Field Engineer').forEach(p=>addRow('masuk',p.nama,p.lokasi||LOKASI_FIELD_ENGINEER[0]));
+    aktif.filter(p=>p.team==='Team Patroli').forEach(p=>addRow('patroli',p.nama,p.lokasi||LOKASI_TEAM_PATROLI[0]));
     addRow('off','','');
     addRow('report','Daily Report',aktif[0]?.nama||'');
     addRow('report','NCR Daily',aktif[0]?.nama||'');
     addRow('report','Morning Briefing',aktif[0]?.nama||'');
   }else{
-    addRow('masuk','Aprilio Parsaoran','Standby di Network Indonesia Timur');
-    addRow('masuk','Rivaldy Kawengian','Standby di Network Indonesia Timur');
-    addRow('masuk','Djetly Sambuni','Standby di Network Indonesia Timur');
-    addRow('patroli','Scivo Kategu','Patroli Malam');
-    addRow('patroli','Ikadek Agus','Patroli Malam');
+    addRow('masuk','Aprilio Parsaoran','CLS Manado-Minahasa');
+    addRow('masuk','Rivaldy Kawengian','CLS Manado-Minahasa');
+    addRow('masuk','Djetly Sambuni','CLS Kauditan');
+    addRow('patroli','Scivo Kategu','Patroli Minahasa Utara');
+    addRow('patroli','Ikadek Agus','Patroli Manado');
     addRow('off','','');
     addRow('report','Daily Report','Rivaldy Kawengian');
     addRow('report','NCR Daily','Rivaldy Kawengian');
@@ -1404,10 +1486,17 @@ function salinDetail(){copyText(arsip[detailIdx].laporan,()=>showNotif('Tersalin
 function getInitial(n){return(n||'?').split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';}
 function getColor(n){let h=0;for(let c of(n||''))h=(h*31+c.charCodeAt(0))%COLORS.length;return COLORS[h];}
 function savePersonilData(){try{localStorage.setItem('personilList',JSON.stringify(personilList));}catch(e){}buildDatalist();}
+
 function renderPersonil(){
   const q=(document.getElementById('persFilter').value||'').toLowerCase();
+  const teamF=document.getElementById('persTeam').value;
   const st=document.getElementById('persStatus').value;
-  const data=personilList.filter(p=>(!q||(p.nama.toLowerCase().includes(q)||(p.team||'').toLowerCase().includes(q)||(p.lokasi||'').toLowerCase().includes(q)))&&(!st||p.status===st));
+  const data=personilList.filter(p=>{
+    const matchQ=!q||(p.nama.toLowerCase().includes(q)||(p.team||'').toLowerCase().includes(q)||(p.lokasi||'').toLowerCase().includes(q));
+    const matchT=!teamF||p.team===teamF;
+    const matchS=!st||p.status===st;
+    return matchQ&&matchT&&matchS;
+  });
   const cont=document.getElementById('personil-grid');
   if(!data.length){cont.innerHTML='<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-users"></i><p>Belum ada personil</p><span>Tambah personil menggunakan tombol "Tambah Personil"</span></div>';return;}
   cont.innerHTML=data.map(p=>{
@@ -1415,7 +1504,7 @@ function renderPersonil(){
     const teamColor=p.team==='Field Engineer'?'badge-b':'badge-g';
     return '<div class="personil-card">'
       +'<div class="pc-top"><div class="pc-avatar" style="background:'+col+'">'+ini+'</div>'
-      +'<div><div class="pc-name">'+p.nama+'</div><div class="pc-jabatan"><span class="badge '+teamColor+'">'+( p.team||'—')+'</span></div></div></div>'
+      +'<div><div class="pc-name">'+p.nama+'</div><div class="pc-team"><span class="badge '+teamColor+'">'+( p.team||'—')+'</span></div></div></div>'
       +'<div class="pc-info">'
       +(p.hp?'<div class="pc-row"><i class="fas fa-phone"></i>'+p.hp+'</div>':'')
       +'<div class="pc-row"><i class="fas fa-location-dot"></i>'+(p.lokasi||'Network Indonesia Timur')+'</div>'
@@ -1428,6 +1517,7 @@ function renderPersonil(){
       +'</div></div>';
   }).join('');
 }
+
 function openPersonilModal(idx=-1){
   document.getElementById('editPersonilIdx').value=idx;
   document.getElementById('modalPersonilTitle').textContent=idx===-1?'Tambah Personil':'Edit Personil';
@@ -1436,25 +1526,31 @@ function openPersonilModal(idx=-1){
     document.getElementById('p-nama').value=p.nama;
     document.getElementById('p-hp').value=p.hp||'';
     document.getElementById('p-team').value=p.team||'Field Engineer';
-    document.getElementById('p-lokasi').value='Network Indonesia Timur';
     document.getElementById('p-status').value=p.status||'aktif';
+    // Set lokasi options sesuai team, lalu set nilai
+    const lokasiSel=document.getElementById('p-lokasi');
+    lokasiSel.innerHTML=buildLokasiSelectHTML(p.team||'Field Engineer', p.lokasi||'');
   }else{
     document.getElementById('p-nama').value='';
     document.getElementById('p-hp').value='';
     document.getElementById('p-team').value='Field Engineer';
-    document.getElementById('p-lokasi').value='Network Indonesia Timur';
     document.getElementById('p-status').value='aktif';
+    const lokasiSel=document.getElementById('p-lokasi');
+    lokasiSel.innerHTML=buildLokasiSelectHTML('Field Engineer','');
   }
   openModal('modalPersonil');
 }
+
 function savePersonil(){
   const nama=document.getElementById('p-nama').value.trim();
   if(!nama){showNotif('Nama personil wajib diisi!','red');return;}
+  const team=document.getElementById('p-team').value;
+  const lokasi=document.getElementById('p-lokasi').value;
   const obj={
     nama,
     hp:document.getElementById('p-hp').value.trim(),
-    team:document.getElementById('p-team').value,
-    lokasi:'Network Indonesia Timur',
+    team,
+    lokasi,
     status:document.getElementById('p-status').value
   };
   const idx=parseInt(document.getElementById('editPersonilIdx').value);
@@ -1564,16 +1660,19 @@ function showNotif(msg,type='green'){
 buildDatalist();
 if(!personilList.length){
   personilList=[
-    {nama:'Aprilio Parsaoran', hp:'081234000001', team:'Field Engineer',  lokasi:'Network Indonesia Timur', status:'aktif'},
-    {nama:'Rivaldy Kawengian', hp:'081234000002', team:'Field Engineer',  lokasi:'Network Indonesia Timur', status:'aktif'},
-    {nama:'Djetly Sambuni',    hp:'081234000003', team:'Field Engineer',  lokasi:'Network Indonesia Timur', status:'aktif'},
-    {nama:'Scivo Kategu',      hp:'081234000004', team:'Team Patroli',    lokasi:'Network Indonesia Timur', status:'aktif'},
-    {nama:'Ikadek Agus',       hp:'081234000005', team:'Team Patroli',    lokasi:'Network Indonesia Timur', status:'aktif'},
+    {nama:'Aprilio Parsaoran', hp:'081234000001', team:'Field Engineer', lokasi:'CLS Manado-Minahasa', status:'aktif'},
+    {nama:'Rivaldy Kawengian', hp:'081234000002', team:'Field Engineer', lokasi:'CLS Manado-Minahasa', status:'aktif'},
+    {nama:'Djetly Sambuni',    hp:'081234000003', team:'Field Engineer', lokasi:'CLS Kauditan',        status:'aktif'},
+    {nama:'Scivo Kategu',      hp:'081234000004', team:'Team Patroli',   lokasi:'Patroli Minahasa Utara', status:'aktif'},
+    {nama:'Ikadek Agus',       hp:'081234000005', team:'Team Patroli',   lokasi:'Patroli Manado',      status:'aktif'},
   ];
   savePersonilData();
 }
 
 if(settings.waDefault)document.getElementById('waNumber').value=settings.waDefault.replace(/^62/,'0');
+
+// Init lokasi options untuk modal (default)
+onTeamChange();
 
 setInterval(updateClock,30000);
 </script>
