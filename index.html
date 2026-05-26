@@ -17,6 +17,7 @@
   --red:#ff5f5f;--red-d:rgba(255,95,95,0.10);
   --purple:#a78bfa;--purple-d:rgba(167,139,250,0.10);
   --cyan:#22d3ee;--cyan-d:rgba(34,211,238,0.10);
+  --orange:#f0883e;--orange-d:rgba(240,136,62,0.10);
   --sidebar-w:230px;--r:12px;--rs:8px;--tr:0.18s ease;
   --font-main:'Inter',sans-serif;--font-display:'Syne',sans-serif;--font-mono:'JetBrains Mono',monospace;
 }
@@ -30,6 +31,7 @@
   --red:#dc2626;--red-d:rgba(220,38,38,0.09);
   --purple:#7c3aed;--purple-d:rgba(124,58,237,0.09);
   --cyan:#0891b2;--cyan-d:rgba(8,145,178,0.09);
+  --orange:#c2570a;--orange-d:rgba(194,87,10,0.09);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-main);background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
@@ -139,37 +141,39 @@ body{font-family:var(--font-main);background:var(--bg);color:var(--text);min-hei
 .form-side{padding:20px;overflow-y:auto;border-right:1px solid var(--border)}
 .preview-side{padding:20px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;background:var(--bg3)}
 
-/* STATS */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
-.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;transition:border .2s,transform .2s;position:relative;overflow:hidden}
+/* STATS - 6 cards */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;transition:border .2s,transform .2s;position:relative;overflow:hidden}
 .stat-card:hover{border-color:var(--border2);transform:translateY(-1px)}
 .stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
 .stat-card.sc-g::after{background:var(--green)}
 .stat-card.sc-b::after{background:var(--blue)}
 .stat-card.sc-r::after{background:var(--red)}
 .stat-card.sc-a::after{background:var(--amber)}
-.stat-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.stat-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px}
+.stat-card.sc-c::after{background:var(--cyan)}
+.stat-card.sc-o::after{background:var(--orange)}
+.stat-hdr{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.stat-ico{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px}
 .ico-g{background:var(--green-d);color:var(--green)}
 .ico-b{background:var(--blue-d);color:var(--blue)}
 .ico-r{background:var(--red-d);color:var(--red)}
 .ico-a{background:var(--amber-d);color:var(--amber)}
-.stat-lbl{font-size:11px;color:var(--muted);font-weight:500}
-.stat-val{font-family:var(--font-display);font-size:26px;font-weight:700;line-height:1}
-.stat-sub{font-size:10px;color:var(--dim);margin-top:2px}
-.stat-trend{font-size:10px;margin-top:4px;font-weight:500}
-.trend-up{color:var(--green)}.trend-dn{color:var(--red)}.trend-eq{color:var(--muted)}
+.ico-c{background:var(--cyan-d);color:var(--cyan)}
+.ico-o{background:var(--orange-d);color:var(--orange)}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:500}
+.stat-val{font-family:var(--font-display);font-size:22px;font-weight:700;line-height:1}
+.stat-sub{font-size:10px;color:var(--dim);margin-top:1px}
 
 /* CHART */
 .chart-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:18px}
 .chart-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .chart-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
-.chart-legend{display:flex;align-items:center;gap:12px}
+.chart-legend{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)}
 .legend-dot{width:8px;height:8px;border-radius:2px}
 .chart-body{height:80px;display:flex;align-items:flex-end;gap:4px}
 .chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
-.chart-bar-group{flex:1;display:flex;align-items:flex-end;gap:2px;width:100%}
+.chart-bar-group{flex:1;display:flex;align-items:flex-end;gap:1px;width:100%}
 .chart-bar{border-radius:3px 3px 0 0;min-height:2px;opacity:.8}
 .chart-bar:hover{opacity:1}
 .chart-day{font-size:9px;color:var(--dim);text-align:center;font-family:var(--font-mono)}
@@ -183,6 +187,8 @@ body{font-family:var(--font-main);background:var(--bg);color:var(--text);min-hei
 .sn-b{background:var(--blue-d);color:var(--blue)}
 .sn-r{background:var(--red-d);color:var(--red)}
 .sn-a{background:var(--amber-d);color:var(--amber)}
+.sn-c{background:var(--cyan-d);color:var(--cyan)}
+.sn-o{background:var(--orange-d);color:var(--orange)}
 .sec-title{font-size:12px;font-weight:700;flex:1;letter-spacing:.02em}
 .sec-count{font-size:10px;color:var(--muted);background:var(--bg4);padding:2px 8px;border-radius:10px}
 .sec-body{padding:12px 14px}
@@ -205,6 +211,12 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
 .del-btn:hover{background:var(--red-d);border-color:var(--red);color:var(--red);transform:scale(1.05)}
 .add-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;width:100%;background:transparent;border:1px dashed var(--border2);border-radius:var(--rs);color:var(--green);font-family:var(--font-main);font-size:12px;font-weight:500;cursor:pointer;transition:all .18s;margin-top:4px}
 .add-btn:hover{border-color:var(--green);background:var(--green-d);border-style:solid}
+
+/* Report section - auto rows styling */
+.report-auto-tag{font-size:9px;background:var(--green-d);color:var(--green);border:1px solid rgba(0,217,126,.25);border-radius:10px;padding:1px 7px;font-weight:600;margin-left:4px;letter-spacing:.02em}
+.row-item-auto .row-input[readonly],.row-item-auto .row-input[disabled]{opacity:.7;cursor:not-allowed;background:var(--bg3)}
+.row-item-auto .row-input[readonly]:focus{border-color:var(--border)}
+
 .btn-row{display:flex;gap:10px;margin-top:18px}
 .btn-gen{flex:1;padding:11px 20px;background:var(--green);border:none;border-radius:var(--r);color:#000;font-family:var(--font-display);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .18s}
 .btn-gen:hover{background:#1af090;transform:translateY(-1px)}
@@ -264,6 +276,8 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
 .badge-r{background:var(--red-d);color:var(--red);border:1px solid rgba(255,95,95,.2)}
 .badge-a{background:var(--amber-d);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
 .badge-p{background:var(--purple-d);color:var(--purple);border:1px solid rgba(167,139,250,.2)}
+.badge-c{background:var(--cyan-d);color:var(--cyan);border:1px solid rgba(34,211,238,.2)}
+.badge-o{background:var(--orange-d);color:var(--orange);border:1px solid rgba(240,136,62,.2)}
 .empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
 .empty-state i{font-size:36px;color:var(--dim);margin-bottom:12px;display:block}
 .empty-state p{font-size:14px;margin-bottom:4px;font-weight:500}
@@ -365,7 +379,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
 .notif-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 
 /* RESPONSIVE */
-@media(max-width:900px){.dash-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.dash-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:768px){
   .sidebar{transform:translateX(-100%)}
   .sidebar.mobile-open{transform:translateX(0)}
@@ -397,7 +411,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
       <div class="login-brand-icon"><i class="fas fa-calendar-check"></i></div>
       <div>
         <div class="login-brand-name">Jadwal Harian</div>
-        <div class="login-brand-sub">Management System v6.0</div>
+        <div class="login-brand-sub">Management System v7.0</div>
       </div>
     </div>
     <div class="login-title">Masuk ke Sistem</div>
@@ -468,7 +482,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
         <div class="u-role" id="sideRole">Pengguna</div>
       </div>
     </div>
-    <div class="u-ver">Versi 6.0.0 &copy; 2025</div>
+    <div class="u-ver">Versi 7.0.0 &copy; 2025</div>
   </div>
 </aside>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
@@ -487,23 +501,31 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
   <div class="page active" id="page-dashboard">
     <div class="dash-grid">
       <div class="form-side">
+
+        <!-- STATS: 6 cards -->
         <div class="stats-row">
-          <div class="stat-card sc-g"><div class="stat-hdr"><div class="stat-ico ico-g"><i class="fas fa-user-check"></i></div><div class="stat-lbl">Masuk</div></div><div class="stat-val" id="st-masuk">0</div><div class="stat-sub">Personil</div><div class="stat-trend" id="trend-masuk"></div></div>
-          <div class="stat-card sc-b"><div class="stat-hdr"><div class="stat-ico ico-b"><i class="fas fa-shield-halved"></i></div><div class="stat-lbl">Patroli</div></div><div class="stat-val" id="st-patroli">0</div><div class="stat-sub">Personil</div><div class="stat-trend" id="trend-patroli"></div></div>
-          <div class="stat-card sc-r"><div class="stat-hdr"><div class="stat-ico ico-r"><i class="fas fa-user-xmark"></i></div><div class="stat-lbl">Off</div></div><div class="stat-val" id="st-off">0</div><div class="stat-sub">Personil</div><div class="stat-trend" id="trend-off"></div></div>
-          <div class="stat-card sc-a"><div class="stat-hdr"><div class="stat-ico ico-a"><i class="fas fa-clipboard-list"></i></div><div class="stat-lbl">Report</div></div><div class="stat-val" id="st-report">0</div><div class="stat-sub">Kegiatan</div><div class="stat-trend" id="trend-report"></div></div>
+          <div class="stat-card sc-g"><div class="stat-hdr"><div class="stat-ico ico-g"><i class="fas fa-wrench"></i></div><div class="stat-lbl">FE Masuk</div></div><div class="stat-val" id="st-masuk">0</div><div class="stat-sub">Field Engineer</div></div>
+          <div class="stat-card sc-b"><div class="stat-hdr"><div class="stat-ico ico-b"><i class="fas fa-pause-circle"></i></div><div class="stat-lbl">FE Standby</div></div><div class="stat-val" id="st-stanby-fe">0</div><div class="stat-sub">Field Engineer</div></div>
+          <div class="stat-card sc-c"><div class="stat-hdr"><div class="stat-ico ico-c"><i class="fas fa-shield-halved"></i></div><div class="stat-lbl">Patroli Masuk</div></div><div class="stat-val" id="st-patroli">0</div><div class="stat-sub">Tim Patroli</div></div>
+          <div class="stat-card sc-o"><div class="stat-hdr"><div class="stat-ico ico-o"><i class="fas fa-moon"></i></div><div class="stat-lbl">Patroli Standby</div></div><div class="stat-val" id="st-stanby-patroli">0</div><div class="stat-sub">Tim Patroli</div></div>
+          <div class="stat-card sc-r"><div class="stat-hdr"><div class="stat-ico ico-r"><i class="fas fa-user-xmark"></i></div><div class="stat-lbl">Off</div></div><div class="stat-val" id="st-off">0</div><div class="stat-sub">Personil</div></div>
+          <div class="stat-card sc-a"><div class="stat-hdr"><div class="stat-ico ico-a"><i class="fas fa-clipboard-list"></i></div><div class="stat-lbl">Report</div></div><div class="stat-val" id="st-report">0</div><div class="stat-sub">Kegiatan</div></div>
         </div>
+
+        <!-- CHART -->
         <div class="chart-section">
           <div class="chart-hdr">
-            <div class="chart-title"><i class="fas fa-chart-bar" style="color:var(--blue);font-size:12px"></i> Kehadiran 7 Hari Terakhir</div>
+            <div class="chart-title"><i class="fas fa-chart-bar" style="color:var(--blue);font-size:12px"></i> Aktivitas 7 Hari Terakhir</div>
             <div class="chart-legend">
-              <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Masuk</div>
-              <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Patroli</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> FE Masuk</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--cyan)"></div> Patroli</div>
               <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Off</div>
             </div>
           </div>
           <div class="chart-body" id="miniChart"></div>
         </div>
+
+        <!-- TANGGAL -->
         <div class="section">
           <div class="sec-hdr"><div class="sec-num sn-g">1</div><i class="fas fa-calendar-days" style="color:var(--green);font-size:12px"></i><div class="sec-title">TANGGAL</div></div>
           <div class="sec-body">
@@ -511,45 +533,112 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
             <div class="date-hint"><i class="fas fa-circle-info" style="font-size:10px"></i> Tanggal otomatis sesuai hari ini</div>
           </div>
         </div>
+
+        <!-- FIELD ENGINEER MASUK -->
         <div class="section">
-          <div class="sec-hdr"><div class="sec-num sn-g">2</div><i class="fas fa-users" style="color:var(--green);font-size:12px"></i><div class="sec-title">MASUK</div><span class="sec-count" id="cnt-masuk">0 orang</span></div>
+          <div class="sec-hdr" style="background:linear-gradient(90deg,var(--bg3),rgba(0,217,126,0.05))">
+            <div class="sec-num sn-g">2</div>
+            <i class="fas fa-wrench" style="color:var(--green);font-size:12px"></i>
+            <div class="sec-title">FIELD ENGINEER — MASUK</div>
+            <span class="sec-count" id="cnt-masuk">0 orang</span>
+          </div>
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Lokasi</span><span></span></div>
             <div id="masuk-rows"></div>
-            <button class="add-btn" onclick="addRow('masuk')"><i class="fas fa-plus"></i> Tambah Personil</button>
+            <button class="add-btn" onclick="addRow('masuk')"><i class="fas fa-plus"></i> Tambah FE</button>
           </div>
         </div>
+
+        <!-- FIELD ENGINEER STANDBY -->
         <div class="section">
-          <div class="sec-hdr"><div class="sec-num sn-b">3</div><i class="fas fa-shield-halved" style="color:var(--blue);font-size:12px"></i><div class="sec-title">PATROLI / STANDBY MALAM</div><span class="sec-count" id="cnt-patroli">0 orang</span></div>
+          <div class="sec-hdr" style="background:linear-gradient(90deg,var(--bg3),rgba(77,159,255,0.05))">
+            <div class="sec-num sn-b">3</div>
+            <i class="fas fa-pause-circle" style="color:var(--blue);font-size:12px"></i>
+            <div class="sec-title">FIELD ENGINEER — STANDBY</div>
+            <span class="sec-count" id="cnt-stanby-fe">0 orang</span>
+          </div>
+          <div class="sec-body">
+            <div class="tbl-hdr"><span>Nama</span><span>Lokasi Standby</span><span></span></div>
+            <div id="stanby-fe-rows"></div>
+            <button class="add-btn" onclick="addRow('stanby-fe')"><i class="fas fa-plus"></i> Tambah FE Standby</button>
+          </div>
+        </div>
+
+        <!-- PATROLI MASUK -->
+        <div class="section">
+          <div class="sec-hdr" style="background:linear-gradient(90deg,var(--bg3),rgba(34,211,238,0.05))">
+            <div class="sec-num sn-c">4</div>
+            <i class="fas fa-shield-halved" style="color:var(--cyan);font-size:12px"></i>
+            <div class="sec-title">TIM PATROLI — MASUK</div>
+            <span class="sec-count" id="cnt-patroli">0 orang</span>
+          </div>
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Lokasi Patroli</span><span></span></div>
             <div id="patroli-rows"></div>
-            <button class="add-btn" onclick="addRow('patroli')"><i class="fas fa-plus"></i> Tambah Personil</button>
+            <button class="add-btn" onclick="addRow('patroli')"><i class="fas fa-plus"></i> Tambah Personil Patroli</button>
           </div>
         </div>
+
+        <!-- PATROLI STANDBY -->
         <div class="section">
-          <div class="sec-hdr"><div class="sec-num sn-r">4</div><i class="fas fa-user-xmark" style="color:var(--red);font-size:12px"></i><div class="sec-title">OFF</div><span class="sec-count" id="cnt-off">0 orang</span></div>
+          <div class="sec-hdr" style="background:linear-gradient(90deg,var(--bg3),rgba(240,136,62,0.05))">
+            <div class="sec-num sn-o">5</div>
+            <i class="fas fa-moon" style="color:var(--orange);font-size:12px"></i>
+            <div class="sec-title">TIM PATROLI — STANDBY</div>
+            <span class="sec-count" id="cnt-stanby-patroli">0 orang</span>
+          </div>
+          <div class="sec-body">
+            <div class="tbl-hdr"><span>Nama</span><span>Lokasi Standby</span><span></span></div>
+            <div id="stanby-patroli-rows"></div>
+            <button class="add-btn" onclick="addRow('stanby-patroli')"><i class="fas fa-plus"></i> Tambah Patroli Standby</button>
+          </div>
+        </div>
+
+        <!-- OFF -->
+        <div class="section">
+          <div class="sec-hdr">
+            <div class="sec-num sn-r">6</div>
+            <i class="fas fa-user-xmark" style="color:var(--red);font-size:12px"></i>
+            <div class="sec-title">OFF / TIDAK HADIR</div>
+            <span class="sec-count" id="cnt-off">0 orang</span>
+          </div>
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Keterangan</span><span></span></div>
             <div id="off-rows"></div>
             <button class="add-btn" onclick="addRow('off')"><i class="fas fa-plus"></i> Tambah Personil</button>
           </div>
         </div>
+
+        <!-- REPORT / PIC - dengan 3 baris auto untuk FE -->
         <div class="section">
-          <div class="sec-hdr"><div class="sec-num sn-a">5</div><i class="fas fa-clipboard-list" style="color:var(--amber);font-size:12px"></i><div class="sec-title">REPORT / PIC</div><span class="sec-count" id="cnt-report">0 kegiatan</span></div>
+          <div class="sec-hdr">
+            <div class="sec-num sn-a">7</div>
+            <i class="fas fa-clipboard-list" style="color:var(--amber);font-size:12px"></i>
+            <div class="sec-title">REPORT / PIC</div>
+            <span class="sec-count" id="cnt-report">0 kegiatan</span>
+            <span class="report-auto-tag">3 Auto FE</span>
+          </div>
           <div class="sec-body">
             <div class="tbl-hdr"><span>Kegiatan</span><span>PIC</span><span></span></div>
+            <!-- 3 baris otomatis untuk Field Engineer -->
+            <div id="report-auto-rows">
+              <!-- Diisi oleh JS -->
+            </div>
+            <!-- Baris manual tambahan -->
             <div id="report-rows"></div>
             <button class="add-btn" onclick="addRow('report')"><i class="fas fa-plus"></i> Tambah Kegiatan</button>
           </div>
         </div>
+
         <div class="btn-row">
           <button class="btn-gen" onclick="generateLaporan()"><i class="fas fa-file-export"></i> Generate Laporan</button>
           <button class="btn-rst" onclick="confirmReset()"><i class="fas fa-rotate-left"></i> Reset</button>
         </div>
         <div class="autosave-indicator" id="autosaveInd"><div class="autosave-dot"></div><span id="autosaveTxt">Draft belum disimpan</span></div>
-        <div class="tips"><i class="fas fa-lightbulb"></i><span>Draft otomatis tersimpan. Isi form lalu klik <strong>Generate Laporan</strong> untuk membuat laporan siap kirim.</span></div>
+        <div class="tips"><i class="fas fa-lightbulb"></i><span>CNR Daily, Daily Report, Morning Briefing otomatis diisi dari FE pertama yang masuk. Isi form lalu klik <strong>Generate Laporan</strong>.</span></div>
       </div>
+
+      <!-- PREVIEW -->
       <div class="preview-side">
         <div class="prev-hdr"><div class="prev-title"><i class="fas fa-file-alt"></i> PREVIEW LAPORAN</div><span class="auto-badge">Auto Update</span></div>
         <div class="wa-cfg">
@@ -663,8 +752,10 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
             <div class="sett-sec-sub">Kustomisasi isi dan tampilan laporan</div>
             <div class="sett-card">
               <div class="sett-row"><div><div class="sett-row-lbl">Judul Laporan</div></div><input class="sett-inp" id="set-lap-judul" placeholder="UPDATE JADWAL HARIAN" oninput="saveSettings()"></div>
-              <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan Seksi Masuk</div></div><label class="toggle"><input type="checkbox" id="set-show-masuk" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
-              <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan Seksi Patroli</div></div><label class="toggle"><input type="checkbox" id="set-show-patroli" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan FE Masuk</div></div><label class="toggle"><input type="checkbox" id="set-show-masuk" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan FE Standby</div></div><label class="toggle"><input type="checkbox" id="set-show-stanby-fe" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan Patroli Masuk</div></div><label class="toggle"><input type="checkbox" id="set-show-patroli" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan Patroli Standby</div></div><label class="toggle"><input type="checkbox" id="set-show-stanby-patroli" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
               <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan Seksi Off</div></div><label class="toggle"><input type="checkbox" id="set-show-off" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
               <div class="sett-row"><div><div class="sett-row-lbl">Tampilkan Seksi Report</div></div><label class="toggle"><input type="checkbox" id="set-show-report" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
             </div>
@@ -688,7 +779,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:p
           <div class="sett-section">
             <div class="sett-sec-title">Tentang Aplikasi</div>
             <div class="sett-card">
-              <div class="sett-row"><div class="sett-row-lbl">Versi</div><span style="font-size:12px;color:var(--muted)">6.0.0</span></div>
+              <div class="sett-row"><div class="sett-row-lbl">Versi</div><span style="font-size:12px;color:var(--muted)">7.0.0</span></div>
               <div class="sett-row"><div class="sett-row-lbl">Platform</div><span style="font-size:12px;color:var(--muted)">Web App (HTML5)</span></div>
               <div class="sett-row"><div class="sett-row-lbl">Total Laporan</div><span style="font-size:12px;color:var(--green)" id="info-total-lap">0</span></div>
               <div class="sett-row"><div class="sett-row-lbl">Total Personil</div><span style="font-size:12px;color:var(--blue)" id="info-total-pers">0</span></div>
@@ -812,12 +903,22 @@ const MON=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','S
 const COLORS=['#00d97e','#4d9fff','#a78bfa','#f5a623','#ff5f5f','#22d3ee','#f0883e'];
 const ROLE_COLORS={Administrator:'#00d97e',Supervisor:'#4d9fff',Petugas:'#a78bfa'};
 
-const LOKASI_FIELD=[
+// Lokasi berdasarkan team
+const LOKASI_FE_MASUK=[
   'CLS Manado-Minahasa','CLS Kauditan','Piket Malam','Stanby'
 ];
-const LOKASI_PATROLI=[
-  'Patroli Minahasa Utara','Patroli Manado','Piket Malam','Stanby CLS Manado-Minahasa','Stanby'
+const LOKASI_FE_STANBY=[
+  'Stanby CLS Manado-Minahasa','Stanby CLS Kauditan','Stanby'
 ];
+const LOKASI_PATROLI_MASUK=[
+  'Patroli Minahasa Utara','Patroli Manado','Piket Malam','Stanby CLS Manado-Minahasa'
+];
+const LOKASI_PATROLI_STANBY=[
+  'Stanby Patroli Manado','Stanby Minahasa Utara','Stanby'
+];
+
+// Tiga report wajib untuk FE
+const REPORT_AUTO=['CNR Daily','Daily Report','Morning Briefing'];
 
 /* ===== STORAGE ===== */
 function ls(k,fb='[]'){try{return JSON.parse(localStorage.getItem(k)||fb)}catch(e){return JSON.parse(fb)}}
@@ -828,7 +929,7 @@ let personilList=ls('personilList');
 let settings=lss('settings','{}');
 let appUsers=ls('appUsers');
 
-/* ===== DEFAULT USERS (first run) ===== */
+/* ===== DEFAULT USERS ===== */
 if(!appUsers.length){
   appUsers=[
     {id:1,username:'admin',     password:'admin123',  name:'Administrator', role:'Administrator', status:'aktif'},
@@ -853,14 +954,63 @@ function toggleThemeFromSett(){isDark=document.getElementById('set-dark').checke
 applyTheme();
 
 /* ===== LOKASI HELPERS ===== */
-function getLokasiOpts(team){return team==='Team Patroli'?LOKASI_PATROLI:LOKASI_FIELD;}
-function buildLokasiHTML(team,sel=''){
-  const opts=getLokasiOpts(team);const s=sel&&opts.includes(sel)?sel:opts[0];
+function getLokasiBySection(section){
+  if(section==='masuk') return LOKASI_FE_MASUK;
+  if(section==='stanby-fe') return LOKASI_FE_STANBY;
+  if(section==='patroli') return LOKASI_PATROLI_MASUK;
+  if(section==='stanby-patroli') return LOKASI_PATROLI_STANBY;
+  return [];
+}
+function buildLokasiHTML(opts, sel=''){
+  const s=sel&&opts.includes(sel)?sel:opts[0];
   return opts.map(o=>`<option value="${esc(o)}"${o===s?' selected':''}>${o}</option>`).join('');
 }
+
+// Modal personil - lokasi sesuai team
+const LOKASI_FIELD_MODAL=['CLS Manado-Minahasa','CLS Kauditan','Piket Malam','Stanby'];
+const LOKASI_PATROLI_MODAL=['Patroli Minahasa Utara','Patroli Manado','Piket Malam','Stanby CLS Manado-Minahasa','Stanby'];
+function getLokasiModal(team){return team==='Team Patroli'?LOKASI_PATROLI_MODAL:LOKASI_FIELD_MODAL;}
 function onTeamChange(){
   const t=document.getElementById('p-team').value;
-  document.getElementById('p-lokasi').innerHTML=buildLokasiHTML(t);
+  const opts=getLokasiModal(t);
+  document.getElementById('p-lokasi').innerHTML=opts.map(o=>`<option value="${esc(o)}">${o}</option>`).join('');
+}
+
+/* ===== AUTO REPORT ROWS ===== */
+function getFirstFEName(){
+  // Ambil nama FE pertama dari baris masuk
+  const rows=document.getElementById('masuk-rows').querySelectorAll('.row-item');
+  for(const r of rows){
+    const n=(r.querySelector('input')?.value||'').trim();
+    if(n) return n;
+  }
+  // Fallback ke data personil FE aktif pertama
+  const p=personilList.find(p=>(p.status==='aktif'||!p.status)&&p.team==='Field Engineer');
+  return p?p.nama:'';
+}
+
+function buildAutoReportRows(){
+  const cont=document.getElementById('report-auto-rows');
+  if(!cont) return;
+  const pic=getFirstFEName()||'—';
+  cont.innerHTML='';
+  REPORT_AUTO.forEach(kegiatan=>{
+    const d=document.createElement('div');
+    d.className='row-item row-item-auto';
+    d.innerHTML=`<input type="text" class="row-input" value="${esc(kegiatan)}" readonly title="Report otomatis untuk Field Engineer">`
+      +`<input type="text" class="row-input row-input-auto-pic" placeholder="PIC otomatis dari FE" value="${esc(pic)}" oninput="onInputChange()">`
+      +`<button class="del-btn" style="opacity:.3;cursor:not-allowed" title="Report ini otomatis" disabled><i class="fas fa-lock"></i></button>`;
+    cont.appendChild(d);
+  });
+  updateStats();
+}
+
+function refreshAutoReportPic(){
+  const pic=getFirstFEName()||'—';
+  document.querySelectorAll('.row-input-auto-pic').forEach(el=>{
+    // Hanya update jika masih default (nama lama) atau kosong
+    el.value=pic;
+  });
 }
 
 /* ===== LOGIN ===== */
@@ -897,10 +1047,7 @@ function enterApp(user){
   document.getElementById('sideRole').textContent=user.role;
   document.getElementById('sideAva').textContent=getInitial(user.name);
   document.getElementById('sideAva').style.background=ROLE_COLORS[user.role]||COLORS[0];
-  // Tampilkan menu admin hanya untuk Administrator
-  document.querySelectorAll('.nav-item-admin').forEach(el=>{
-    el.classList.toggle('show',user.role==='Administrator');
-  });
+  document.querySelectorAll('.nav-item-admin').forEach(el=>el.classList.toggle('show',user.role==='Administrator'));
   showNotif('Selamat datang, '+user.name+'!','green');
   initDate();loadDraft();updateStats();renderMiniChart();updateLapBadge();
 }
@@ -925,7 +1072,6 @@ function submitForgot(){
 
 (function checkSession(){
   try{const saved=JSON.parse(sessionStorage.getItem('loggedUser')||'null');if(saved){
-    // Refresh user dari storage (data terbaru)
     const fresh=appUsers.find(u=>u.id===saved.id||u.username===saved.username);
     if(fresh&&fresh.status==='aktif'){enterApp(fresh);return;}
     sessionStorage.removeItem('loggedUser');
@@ -939,12 +1085,8 @@ let isMobile=()=>window.innerWidth<=768;
 function applySidebar(){
   const s=document.getElementById('sidebar'),m=document.getElementById('mainContent');
   if(!s||!m)return;
-  if(isMobile()){
-    s.classList.remove('collapsed');m.classList.remove('expanded');
-  }else{
-    if(sidebarCollapsed){s.classList.add('collapsed');m.classList.add('expanded');}
-    else{s.classList.remove('collapsed');m.classList.remove('expanded');}
-  }
+  if(isMobile()){s.classList.remove('collapsed');m.classList.remove('expanded');}
+  else{if(sidebarCollapsed){s.classList.add('collapsed');m.classList.add('expanded');}else{s.classList.remove('collapsed');m.classList.remove('expanded');}}
 }
 function toggleSidebar(){
   if(isMobile()){
@@ -978,7 +1120,6 @@ document.getElementById('tanggal').addEventListener('change',e=>{document.getEle
 
 /* ===== PAGE NAV ===== */
 function goPage(id,el){
-  // Cek akses halaman admin
   if(id==='users'&&currentUser?.role!=='Administrator'){showNotif('Akses hanya untuk Administrator!','red');return;}
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -999,12 +1140,35 @@ function goSett(id,el){
 }
 
 /* ===== ROWS ===== */
-function getRows(s){
-  return Array.from(document.getElementById(s+'-rows').querySelectorAll('.row-item')).map(r=>{
+// Sections yang menggunakan dropdown lokasi
+const DROPDOWN_SECTIONS=['masuk','stanby-fe','patroli','stanby-patroli'];
+
+function getAllRows(s){
+  const cont=document.getElementById(s+'-rows');if(!cont)return[];
+  return Array.from(cont.querySelectorAll('.row-item')).map(r=>{
     const inputs=r.querySelectorAll('input,select');
     return{col1:(inputs[0]?.value||'').trim(),col2:(inputs[1]?.value||'').trim()};
   });
 }
+function getRows(s){return getAllRows(s);}
+
+function getAutoReportRows(){
+  return Array.from(document.querySelectorAll('#report-auto-rows .row-item')).map(r=>{
+    const inputs=r.querySelectorAll('input');
+    return{col1:(inputs[0]?.value||'').trim(),col2:(inputs[1]?.value||'').trim()};
+  });
+}
+function getManualReportRows(){
+  const cont=document.getElementById('report-rows');if(!cont)return[];
+  return Array.from(cont.querySelectorAll('.row-item')).map(r=>{
+    const inputs=r.querySelectorAll('input');
+    return{col1:(inputs[0]?.value||'').trim(),col2:(inputs[1]?.value||'').trim()};
+  });
+}
+function getAllReportRows(){
+  return [...getAutoReportRows(),...getManualReportRows()];
+}
+
 function buildDatalist(){
   let dl=document.getElementById('personil-datalist');
   if(!dl){dl=document.createElement('datalist');dl.id='personil-datalist';document.body.appendChild(dl);}
@@ -1012,64 +1176,81 @@ function buildDatalist(){
   personilList.filter(p=>p.status==='aktif'||!p.status).forEach(p=>{const o=document.createElement('option');o.value=p.nama;dl.appendChild(o);});
 }
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function getPersonilTeam(nama){const p=personilList.find(p=>p.nama.toLowerCase()===nama.toLowerCase());return p?p.team:'Field Engineer';}
+
 function addRow(s,c1='',c2=''){
-  const cont=document.getElementById(s+'-rows');const d=document.createElement('div');d.className='row-item';
-  if(s==='masuk'||s==='patroli'){
-    const team=c1?getPersonilTeam(c1):(s==='patroli'?'Team Patroli':'Field Engineer');
-    const lokasiOpts=buildLokasiHTML(team,c2);
-    d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()" onchange="onNamaChange(this,'${s}')">`
-      +`<select class="row-select" oninput="onInputChange()">${lokasiOpts}</select>`
-      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
-  }else if(s==='off'){
-    d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()">`
-      +`<input type="text" class="row-input" placeholder="Keterangan" value="${esc(c2)}" oninput="onInputChange()">`
-      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
-  }else{
+  // report manual
+  if(s==='report'){
+    const cont=document.getElementById('report-rows');const d=document.createElement('div');d.className='row-item';
     d.innerHTML=`<input type="text" class="row-input" placeholder="Kegiatan" value="${esc(c1)}" oninput="onInputChange()">`
       +`<input type="text" class="row-input" placeholder="PIC" value="${esc(c2)}" oninput="onInputChange()">`
       +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+    cont.appendChild(d);updateStats();scheduleAutosave();return;
   }
-  cont.appendChild(d);updateStats();scheduleAutosave();
+  // off
+  if(s==='off'){
+    const cont=document.getElementById('off-rows');const d=document.createElement('div');d.className='row-item';
+    d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()">`
+      +`<input type="text" class="row-input" placeholder="Keterangan" value="${esc(c2)}" oninput="onInputChange()">`
+      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+    cont.appendChild(d);updateStats();scheduleAutosave();return;
+  }
+  // sections dengan dropdown lokasi
+  if(DROPDOWN_SECTIONS.includes(s)){
+    const cont=document.getElementById(s+'-rows');const d=document.createElement('div');d.className='row-item';
+    const opts=getLokasiBySection(s);
+    const lokasiHTML=buildLokasiHTML(opts,c2);
+    const nameChangeAttr=(s==='masuk')?` onchange="onFENameChange(this)"`:'';
+    d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()"${nameChangeAttr}>`
+      +`<select class="row-select" oninput="onInputChange()">${lokasiHTML}</select>`
+      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+    cont.appendChild(d);
+    if(s==='masuk') refreshAutoReportPic();
+    updateStats();scheduleAutosave();
+  }
 }
-function onInputChange(){updateStats();scheduleAutosave();}
-function onNamaChange(el,s){
-  const nama=el.value.trim();
-  const p=personilList.find(p=>p.nama.toLowerCase()===nama.toLowerCase());
-  const sel=el.closest('.row-item').querySelector('select.row-select');if(!sel)return;
-  const team=p?p.team:(s==='patroli'?'Team Patroli':'Field Engineer');
-  const opts=getLokasiOpts(team);const oldVal=sel.value;
-  sel.innerHTML=opts.map(o=>`<option value="${esc(o)}"${o===oldVal?' selected':''}>${o}</option>`).join('');
-  if(p&&!opts.includes(oldVal))sel.value=p.lokasi&&opts.includes(p.lokasi)?p.lokasi:opts[0];
+
+function onFENameChange(el){
+  // Update auto-report PIC saat nama FE masuk berubah
+  refreshAutoReportPic();
   onInputChange();
 }
-function delRow(btn){btn.closest('.row-item').remove();updateStats();scheduleAutosave();}
+
+function onInputChange(){updateStats();scheduleAutosave();}
+function delRow(btn){
+  btn.closest('.row-item').remove();
+  refreshAutoReportPic();
+  updateStats();scheduleAutosave();
+}
 
 /* ===== STATS ===== */
 function updateStats(){
-  ['masuk','patroli','off','report'].forEach(s=>{
-    const n=document.getElementById(s+'-rows').querySelectorAll('.row-item').length;
-    document.getElementById('st-'+s).textContent=n;
-    document.getElementById('cnt-'+s).textContent=n+(s==='report'?' kegiatan':' orang');
-  });
-  updateTrends();updateLapBadge();
+  // FE masuk
+  const nm=document.getElementById('masuk-rows').querySelectorAll('.row-item').length;
+  document.getElementById('st-masuk').textContent=nm;
+  document.getElementById('cnt-masuk').textContent=nm+' orang';
+  // FE stanby
+  const nsf=document.getElementById('stanby-fe-rows').querySelectorAll('.row-item').length;
+  document.getElementById('st-stanby-fe').textContent=nsf;
+  document.getElementById('cnt-stanby-fe').textContent=nsf+' orang';
+  // Patroli masuk
+  const np=document.getElementById('patroli-rows').querySelectorAll('.row-item').length;
+  document.getElementById('st-patroli').textContent=np;
+  document.getElementById('cnt-patroli').textContent=np+' orang';
+  // Patroli stanby
+  const nsp=document.getElementById('stanby-patroli-rows').querySelectorAll('.row-item').length;
+  document.getElementById('st-stanby-patroli').textContent=nsp;
+  document.getElementById('cnt-stanby-patroli').textContent=nsp+' orang';
+  // Off
+  const no=document.getElementById('off-rows').querySelectorAll('.row-item').length;
+  document.getElementById('st-off').textContent=no;
+  document.getElementById('cnt-off').textContent=no+' orang';
+  // Report (auto + manual)
+  const nr=getAllReportRows().filter(r=>r.col1).length;
+  document.getElementById('st-report').textContent=nr;
+  document.getElementById('cnt-report').textContent=nr+' kegiatan';
+  updateLapBadge();
 }
-function updateTrends(){
-  const yesterday=getYesterdayData();if(!yesterday)return;
-  ['masuk','patroli','off','report'].forEach(s=>{
-    const cur=document.getElementById(s+'-rows').querySelectorAll('.row-item').length;
-    const prev=(yesterday[s]||[]).filter(r=>r.col1).length;
-    const diff=cur-prev;const el=document.getElementById('trend-'+s);
-    if(diff>0)el.innerHTML=`<span class="trend-up">↑ +${diff} dari kemarin</span>`;
-    else if(diff<0)el.innerHTML=`<span class="trend-dn">↓ ${diff} dari kemarin</span>`;
-    else el.innerHTML=`<span class="trend-eq">= sama dengan kemarin</span>`;
-  });
-}
-function getYesterdayData(){
-  const n=new Date();n.setDate(n.getDate()-1);
-  const yd=n.getFullYear()+'-'+pad(n.getMonth()+1)+'-'+pad(n.getDate());
-  return arsip.find(a=>a.tgl===yd)||null;
-}
+
 function updateLapBadge(){
   const b=document.getElementById('lapBadge');
   if(arsip.length>0){b.style.display='';b.textContent=arsip.length;}else b.style.display='none';
@@ -1081,14 +1262,21 @@ function renderMiniChart(){
   const days=[];const n=new Date();
   for(let i=6;i>=0;i--){const d=new Date(n);d.setDate(d.getDate()-i);days.push(d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()));}
   const dayLabels=days.map(d=>{const x=new Date(d+'T00:00:00');return DAYS[x.getDay()].slice(0,3);});
-  const maxVal=Math.max(...days.map(d=>{const a=arsip.find(a=>a.tgl===d);if(!a)return 0;return Math.max((a.masuk||[]).filter(r=>r.col1).length,(a.patroli||[]).filter(r=>r.col1).length,(a.off||[]).filter(r=>r.col1).length);}),1);
+  const maxVal=Math.max(...days.map(d=>{const a=arsip.find(a=>a.tgl===d);if(!a)return 0;
+    return Math.max(
+      (a.masuk||[]).filter(r=>r.col1).length,
+      (a.patroli||[]).filter(r=>r.col1).length,
+      (a.off||[]).filter(r=>r.col1).length
+    );}),1);
   cont.innerHTML='';
   days.forEach((day,i)=>{
     const a=arsip.find(a=>a.tgl===day);
-    const m=a?(a.masuk||[]).filter(r=>r.col1).length:0,p=a?(a.patroli||[]).filter(r=>r.col1).length:0,o=a?(a.off||[]).filter(r=>r.col1).length:0;
+    const m=a?(a.masuk||[]).filter(r=>r.col1).length:0;
+    const p=a?(a.patroli||[]).filter(r=>r.col1).length:0;
+    const o=a?(a.off||[]).filter(r=>r.col1).length:0;
     const wrap=document.createElement('div');wrap.className='chart-bar-wrap';
     const grp=document.createElement('div');grp.className='chart-bar-group';
-    [[m,'var(--green)'],[p,'var(--blue)'],[o,'var(--red)']].forEach(([v,c])=>{
+    [[m,'var(--green)'],[p,'var(--cyan)'],[o,'var(--red)']].forEach(([v,c])=>{
       const bar=document.createElement('div');bar.className='chart-bar';
       bar.style.cssText=`background:${c};flex:1;height:${Math.max(v/maxVal*72,v>0?4:0)}px`;bar.title=v;grp.appendChild(bar);
     });
@@ -1097,28 +1285,97 @@ function renderMiniChart(){
   });
 }
 
-/* ===== GENERATE ===== */
+/* ===== GENERATE LAPORAN ===== */
 function generateLaporan(){
   const tgl=document.getElementById('tanggal').value;
   const tglStr=fmtDate(tgl)||'—';
   const judul=(settings.lapJudul||'UPDATE JADWAL HARIAN').toUpperCase();
-  const unit=settings.unit?'\nUnit: '+settings.unit:'';
-  const SEP='═'.repeat(34);
+  const unit=settings.unit?'\nUnit : '+settings.unit:'';
+  const SEP='═'.repeat(36);
+  const SEP2='─'.repeat(36);
+
   let txt=judul+unit+'\n'+tglStr+'\n'+SEP+'\n\n';
-  const buildSec=(label,s)=>{
-    const rows=getRows(s).filter(r=>r.col1);
-    txt+='❯ '+label+'\n';
-    if(!rows.length)txt+='  (Tidak ada data)\n';
-    else rows.forEach(r=>txt+='  '+r.col1.padEnd(20)+': '+r.col2+'\n');
+
+  // Helper section
+  const buildSec=(emoji,label,rows)=>{
+    if(!rows.length){txt+='  (Tidak ada data)\n\n';return;}
+    rows.forEach((r,i)=>{
+      const nama=(r.col1||'').padEnd(22);
+      const loc=r.col2||'—';
+      txt+=(i===0?'  ':'  ')+nama+': '+loc+'\n';
+    });
     txt+='\n';
   };
-  if(settings.showMasuk!==false)buildSec('MASUK','masuk');
-  if(settings.showPatroli!==false)buildSec('PATROLI / STANDBY MALAM','patroli');
-  if(settings.showOff!==false)buildSec('Stanby','Stanby');
-  if(settings.showReport!==false)buildSec('REPORT / PIC','report');
+
+  // ---- FIELD ENGINEER ----
+  const feMasuk=getRows('masuk').filter(r=>r.col1);
+  const feStanby=getRows('stanby-fe').filter(r=>r.col1);
+
+  if(settings.showMasuk!==false){
+    txt+='👷 FIELD ENGINEER — MASUK\n'+SEP2+'\n';
+    if(!feMasuk.length) txt+='  (Tidak ada)\n';
+    else feMasuk.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+    txt+='\n';
+  }
+  if(settings.showStanbyFe!==false){
+    txt+='⏸ FIELD ENGINEER — STANDBY\n'+SEP2+'\n';
+    if(!feStanby.length) txt+='  (Tidak ada)\n';
+    else feStanby.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+    txt+='\n';
+  }
+
+  // ---- TIM PATROLI ----
+  const patroliMasuk=getRows('patroli').filter(r=>r.col1);
+  const patroliStanby=getRows('stanby-patroli').filter(r=>r.col1);
+
+  if(settings.showPatroli!==false){
+    txt+='🛡 TIM PATROLI — MASUK\n'+SEP2+'\n';
+    if(!patroliMasuk.length) txt+='  (Tidak ada)\n';
+    else patroliMasuk.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+    txt+='\n';
+  }
+  if(settings.showStanbyPatroli!==false){
+    txt+='🌙 TIM PATROLI — STANDBY\n'+SEP2+'\n';
+    if(!patroliStanby.length) txt+='  (Tidak ada)\n';
+    else patroliStanby.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+    txt+='\n';
+  }
+
+  // ---- OFF ----
+  const offRows=getRows('off').filter(r=>r.col1);
+  if(settings.showOff!==false){
+    txt+='❌ OFF / TIDAK HADIR\n'+SEP2+'\n';
+    if(!offRows.length) txt+='  (Tidak ada)\n';
+    else offRows.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+    txt+='\n';
+  }
+
+  // ---- REPORT / PIC ----
+  const allReport=getAllReportRows().filter(r=>r.col1);
+  if(settings.showReport!==false){
+    txt+='📋 REPORT / PIC\n'+SEP2+'\n';
+    if(!allReport.length) txt+='  (Tidak ada)\n';
+    else allReport.forEach(r=>txt+='  ✦ '+r.col1.padEnd(24)+': '+r.col2+'\n');
+    txt+='\n';
+  }
+
   txt+=SEP;
-  laporan=txt.trimEnd();renderPreview(laporan);updateStats();
-  const obj={id:Date.now(),tgl,tglStr,laporan,masuk:getRows('masuk'),patroli:getRows('patroli'),off:getRows('off'),report:getRows('report'),createdAt:new Date().toLocaleString('id-ID')};
+  laporan=txt.trimEnd();
+  renderPreview(laporan);
+  updateStats();
+
+  // Simpan ke arsip
+  const allReportSave=getAllReportRows();
+  const obj={
+    id:Date.now(),tgl,tglStr,laporan,
+    masuk:getRows('masuk'),
+    'stanby-fe':getRows('stanby-fe'),
+    patroli:getRows('patroli'),
+    'stanby-patroli':getRows('stanby-patroli'),
+    off:getRows('off'),
+    report:allReportSave,
+    createdAt:new Date().toLocaleString('id-ID')
+  };
   const dupIdx=arsip.findIndex(a=>a.tgl===tgl);
   if(dupIdx>=0)arsip[dupIdx]=obj;else arsip.unshift(obj);
   saveArsip();renderMiniChart();showNotif('Laporan berhasil di-generate!','green');
@@ -1128,15 +1385,20 @@ function renderPreview(txt){
   const box=document.getElementById('previewBox');box.innerHTML='';
   txt.split('\n').forEach((line,i)=>{
     const span=document.createElement('span');
-    if(i===0){span.style.color='var(--green)';span.style.fontWeight='700';}
-    else if(i===1){span.style.color='var(--muted)';}
+    if(i===0){span.style.color='var(--green)';span.style.fontWeight='700';span.style.fontSize='12px';}
+    else if(i===1){span.style.color='var(--cyan)';span.style.fontWeight='500';}
     else if(line.startsWith('═')){span.style.color='var(--dim)';}
-    else if(line.startsWith('❯')){span.style.color='var(--amber)';span.style.fontWeight='700';}
-    else if(line.includes(': ')){
-      const idx=line.indexOf(': ');
-      const s1=document.createElement('span');s1.style.color='var(--blue)';s1.textContent=line.slice(0,idx);
-      const s2=document.createElement('span');s2.style.color='var(--muted)';s2.textContent=': '+line.slice(idx+2);
-      span.appendChild(s1);span.appendChild(s2);box.appendChild(span);box.appendChild(document.createTextNode('\n'));return;
+    else if(line.startsWith('─')){span.style.color='var(--border2)';}
+    else if(line.match(/^[👷⏸🛡🌙❌📋]/)){
+      span.style.color='var(--amber)';span.style.fontWeight='700';span.style.fontSize='11.5px';
+    }
+    else if(line.includes('  ✦ ')){
+      const idx=line.lastIndexOf(': ');
+      if(idx>0){
+        const s1=document.createElement('span');s1.style.color='var(--blue)';s1.textContent=line.slice(0,idx);
+        const s2=document.createElement('span');s2.style.color='var(--muted)';s2.textContent=': '+line.slice(idx+2);
+        span.appendChild(s1);span.appendChild(s2);box.appendChild(span);box.appendChild(document.createTextNode('\n'));return;
+      }
     }else{span.style.color='var(--muted)';}
     span.textContent=line;box.appendChild(span);box.appendChild(document.createTextNode('\n'));
   });
@@ -1151,35 +1413,60 @@ function scheduleAutosave(){
   autosaveTimer=setTimeout(()=>{saveDraft();ind.classList.add('saved');txt.textContent='Draft tersimpan · '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});},1200);
 }
 function saveDraft(){
-  const draft={tgl:document.getElementById('tanggal').value,masuk:getRows('masuk'),patroli:getRows('patroli'),off:getRows('off'),report:getRows('report')};
+  const draft={
+    tgl:document.getElementById('tanggal').value,
+    masuk:getRows('masuk'),
+    'stanby-fe':getRows('stanby-fe'),
+    patroli:getRows('patroli'),
+    'stanby-patroli':getRows('stanby-patroli'),
+    off:getRows('off'),
+    report:getManualReportRows()
+  };
   try{localStorage.setItem('draft',JSON.stringify(draft));}catch(e){}
 }
 function loadDraft(){
+  buildAutoReportRows(); // Selalu bangun auto rows dulu
   try{
     const d=JSON.parse(localStorage.getItem('draft')||'null');
     if(!d)return loadDefaults();
     if(d.tgl){document.getElementById('tanggal').value=d.tgl;document.getElementById('tglFmt').textContent=fmtDate(d.tgl);}
-    ['masuk','patroli','off','report'].forEach(s=>{document.getElementById(s+'-rows').innerHTML='';(d[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));});
+    ['masuk','stanby-fe','patroli','stanby-patroli','off'].forEach(s=>{
+      document.getElementById(s+'-rows').innerHTML='';
+      (d[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));
+    });
+    // Report manual
+    document.getElementById('report-rows').innerHTML='';
+    (d.report||[]).forEach(r=>addRow('report',r.col1,r.col2));
+    refreshAutoReportPic();
     const ind=document.getElementById('autosaveInd');ind.classList.add('saved');document.getElementById('autosaveTxt').textContent='Draft dimuat otomatis';
   }catch(e){loadDefaults();}
 }
 function loadDefaults(){
+  buildAutoReportRows();
   const aktif=personilList.filter(p=>p.status==='aktif'||!p.status);
   if(aktif.length){
-    aktif.filter(p=>p.team==='Field Engineer').forEach(p=>addRow('masuk',p.nama,p.lokasi||LOKASI_FIELD[0]));
-    aktif.filter(p=>p.team==='Team Patroli').forEach(p=>addRow('patroli',p.nama,p.lokasi||LOKASI_PATROLI[0]));
-    addRow('off','','');addRow('report','Daily Report',aktif[0]?.nama||'');addRow('report','NCR Daily',aktif[0]?.nama||'');addRow('report','Morning Briefing',aktif[0]?.nama||'');
+    aktif.filter(p=>p.team==='Field Engineer').forEach(p=>addRow('masuk',p.nama,p.lokasi||LOKASI_FE_MASUK[0]));
+    aktif.filter(p=>p.team==='Team Patroli').forEach(p=>addRow('patroli',p.nama,p.lokasi||LOKASI_PATROLI_MASUK[0]));
+    addRow('off','','');
+    // Report manual tambahan
+    addRow('report','Kunjungan NOC','');
   }else{
-    addRow('masuk','Aprilio Parsaoran','CLS Manado-Minahasa');addRow('masuk','Rivaldy Kawengian','CLS Manado-Minahasa');addRow('masuk','Djetly Sambuni','CLS Kauditan');
-    addRow('patroli','Scivo Kategu','Patroli Minahasa Utara');addRow('patroli','Ikadek Agus','Patroli Manado');
-    addRow('off','','');addRow('report','Daily Report','Rivaldy Kawengian');addRow('report','NCR Daily','Rivaldy Kawengian');addRow('report','Morning Briefing','Rivaldy Kawengian');
+    addRow('masuk','Aprilio Parsaoran','CLS Manado-Minahasa');
+    addRow('masuk','Rivaldy Kawengian','CLS Manado-Minahasa');
+    addRow('masuk','Djetly Sambuni','CLS Kauditan');
+    addRow('patroli','Scivo Kategu','Patroli Minahasa Utara');
+    addRow('patroli','Ikadek Agus','Patroli Manado');
+    addRow('off','','');
+    addRow('report','Kunjungan NOC','');
   }
+  refreshAutoReportPic();
 }
 
 /* ===== RESET ===== */
 function confirmReset(){
   showConfirm('Reset Form?','Semua isi form akan dikosongkan.',()=>{
-    ['masuk','patroli','off','report'].forEach(s=>document.getElementById(s+'-rows').innerHTML='');
+    ['masuk','stanby-fe','patroli','stanby-patroli','off','report'].forEach(s=>document.getElementById(s+'-rows').innerHTML='');
+    buildAutoReportRows();
     initDate();laporan='';document.getElementById('previewBox').textContent='Isi form di sebelah kiri dan klik "Generate Laporan"...';
     localStorage.removeItem('draft');updateStats();
     document.getElementById('autosaveInd').classList.remove('saved');document.getElementById('autosaveTxt').textContent='Draft belum disimpan';
@@ -1205,19 +1492,40 @@ function renderLaporan(){
   const cont=document.getElementById('laporan-list');
   if(!data.length){cont.innerHTML='<div class="empty-state"><i class="fas fa-folder-open"></i><p>Belum ada laporan tersimpan</p><span>Generate laporan dari Dashboard terlebih dahulu</span></div>';return;}
   const mTh=(col,lbl)=>`<th class="${lapSortCol===col?(lapSortDir===1?'sort-asc':'sort-desc'):''}" onclick="sortLaporan('${col}')">${lbl}</th>`;
-  cont.innerHTML='<table class="lap-table"><thead><tr>'+mTh('tgl','Tanggal')+'<th>Masuk</th><th>Patroli</th><th>Off</th><th>Report</th><th>Dibuat</th><th>Aksi</th></tr></thead><tbody>'
+  cont.innerHTML='<table class="lap-table"><thead><tr>'+mTh('tgl','Tanggal')
+    +'<th>FE Masuk</th><th>Patroli</th><th>Off</th><th>Report</th><th>Dibuat</th><th>Aksi</th></tr></thead><tbody>'
     +data.map(a=>{
       const idx=arsip.indexOf(a);
-      const m=(a.masuk||[]).filter(r=>r.col1).length,p=(a.patroli||[]).filter(r=>r.col1).length,o=(a.off||[]).filter(r=>r.col1).length,r=(a.report||[]).filter(r=>r.col1).length;
-      return `<tr><td><strong>${a.tglStr}</strong></td><td><span class="badge badge-g">${m} org</span></td><td><span class="badge badge-b">${p} org</span></td><td><span class="badge badge-r">${o} org</span></td><td><span class="badge badge-a">${r} keg</span></td><td style="color:var(--muted);font-size:11px">${a.createdAt||'-'}</td><td><div class="td-act"><button class="btn-sm" onclick="detailLaporan(${idx})"><i class="fas fa-eye"></i> Lihat</button><button class="btn-sm" onclick="muatLaporan(${idx})"><i class="fas fa-pen"></i> Edit</button><button class="btn-sm btn-sm-red" onclick="confirmHapusLaporanDirect(${idx})"><i class="fas fa-trash"></i></button></div></td></tr>`;
+      const m=(a.masuk||[]).filter(r=>r.col1).length;
+      const p=(a.patroli||[]).filter(r=>r.col1).length;
+      const o=(a.off||[]).filter(r=>r.col1).length;
+      const r=(a.report||[]).filter(r=>r.col1).length;
+      return `<tr><td><strong>${a.tglStr}</strong></td><td><span class="badge badge-g">${m} org</span></td><td><span class="badge badge-c">${p} org</span></td><td><span class="badge badge-r">${o} org</span></td><td><span class="badge badge-a">${r} keg</span></td><td style="color:var(--muted);font-size:11px">${a.createdAt||'-'}</td><td><div class="td-act"><button class="btn-sm" onclick="detailLaporan(${idx})"><i class="fas fa-eye"></i> Lihat</button><button class="btn-sm" onclick="muatLaporan(${idx})"><i class="fas fa-pen"></i> Edit</button><button class="btn-sm btn-sm-red" onclick="confirmHapusLaporanDirect(${idx})"><i class="fas fa-trash"></i></button></div></td></tr>`;
     }).join('')+'</tbody></table>';
 }
 function sortLaporan(col){if(lapSortCol===col)lapSortDir*=-1;else{lapSortCol=col;lapSortDir=1;}renderLaporan();}
 function clearLapFilter(){document.getElementById('lapFilter').value='';document.getElementById('lapDate').value='';renderLaporan();}
 function detailLaporan(idx){detailIdx=idx;const a=arsip[idx];document.getElementById('modalLapTitle').textContent='Laporan — '+a.tglStr;document.getElementById('detLapBox').textContent=a.laporan;openModal('modalLapDetail');}
 function muatLaporan(idx){
-  const a=arsip[idx];goPage('dashboard',document.getElementById('nav-dashboard'));
-  setTimeout(()=>{document.getElementById('tanggal').value=a.tgl;document.getElementById('tglFmt').textContent=fmtDate(a.tgl);['masuk','patroli','off','report'].forEach(s=>{document.getElementById(s+'-rows').innerHTML='';(a[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));});generateLaporan();},100);
+  const a=arsip[idx];
+  goPage('dashboard',document.getElementById('nav-dashboard'));
+  setTimeout(()=>{
+    document.getElementById('tanggal').value=a.tgl;
+    document.getElementById('tglFmt').textContent=fmtDate(a.tgl);
+    ['masuk','stanby-fe','patroli','stanby-patroli','off'].forEach(s=>{
+      document.getElementById(s+'-rows').innerHTML='';
+      (a[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));
+    });
+    // Rebuild auto rows dengan pic terbaru
+    buildAutoReportRows();
+    // Load report manual (semua report yang bukan dari auto)
+    document.getElementById('report-rows').innerHTML='';
+    // Filter yang bukan dari REPORT_AUTO
+    const saved=(a.report||[]).filter(r=>!REPORT_AUTO.includes(r.col1));
+    saved.forEach(r=>addRow('report',r.col1,r.col2));
+    refreshAutoReportPic();
+    generateLaporan();
+  },100);
 }
 function confirmHapusLaporanDirect(idx){showConfirm('Hapus Laporan?','Laporan ini akan dihapus secara permanen.',()=>{arsip.splice(idx,1);saveArsip();renderLaporan();updateLapBadge();renderMiniChart();showNotif('Laporan dihapus','red');});}
 function confirmHapusLaporan(){showConfirm('Hapus Laporan?','Laporan ini akan dihapus secara permanen.',()=>{arsip.splice(detailIdx,1);saveArsip();closeModal('modalLapDetail');renderLaporan();updateLapBadge();renderMiniChart();showNotif('Laporan dihapus','red');});}
@@ -1239,15 +1547,15 @@ function renderPersonil(){
   if(!data.length){cont.innerHTML='<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-users"></i><p>Belum ada personil</p><span>Tambah personil menggunakan tombol di atas</span></div>';return;}
   cont.innerHTML=data.map(p=>{
     const idx=personilList.indexOf(p);const col=getColor(p.nama);const ini=getInitial(p.nama);
-    const tc=p.team==='Field Engineer'?'badge-b':'badge-g';
+    const tc=p.team==='Field Engineer'?'badge-b':'badge-c';
     return `<div class="personil-card"><div class="pc-top"><div class="pc-avatar" style="background:${col}">${ini}</div><div><div class="pc-name">${p.nama}</div><div class="pc-team"><span class="badge ${tc}">${p.team||'—'}</span></div></div></div><div class="pc-info">${p.hp?`<div class="pc-row"><i class="fas fa-phone"></i>${p.hp}</div>`:''}<div class="pc-row"><i class="fas fa-location-dot"></i>${p.lokasi||'—'}</div><div class="pc-row"><i class="fas fa-circle" style="color:${p.status==='aktif'?'var(--green)':'var(--red)'};font-size:7px"></i><span class="badge ${p.status==='aktif'?'badge-g':'badge-r'}">${p.status==='aktif'?'Aktif':'Non-aktif'}</span></div></div><div class="pc-foot"><button class="btn-sm" style="flex:1" onclick="openPersonilModal(${idx})"><i class="fas fa-pen"></i> Edit</button><button class="btn-sm btn-sm-red" onclick="confirmHapusPersonil(${idx})"><i class="fas fa-trash"></i></button></div></div>`;
   }).join('');
 }
 function openPersonilModal(idx=-1){
   document.getElementById('editPersonilIdx').value=idx;
   document.getElementById('modalPersonilTitle').textContent=idx===-1?'Tambah Personil':'Edit Personil';
-  if(idx>=0){const p=personilList[idx];document.getElementById('p-nama').value=p.nama;document.getElementById('p-hp').value=p.hp||'';document.getElementById('p-team').value=p.team||'Field Engineer';document.getElementById('p-status').value=p.status||'aktif';document.getElementById('p-lokasi').innerHTML=buildLokasiHTML(p.team||'Field Engineer',p.lokasi||'');}
-  else{document.getElementById('p-nama').value='';document.getElementById('p-hp').value='';document.getElementById('p-team').value='Field Engineer';document.getElementById('p-status').value='aktif';document.getElementById('p-lokasi').innerHTML=buildLokasiHTML('Field Engineer');}
+  if(idx>=0){const p=personilList[idx];document.getElementById('p-nama').value=p.nama;document.getElementById('p-hp').value=p.hp||'';document.getElementById('p-team').value=p.team||'Field Engineer';document.getElementById('p-status').value=p.status||'aktif';const opts=getLokasiModal(p.team||'Field Engineer');document.getElementById('p-lokasi').innerHTML=opts.map(o=>`<option value="${esc(o)}"${o===p.lokasi?' selected':''}>${o}</option>`).join('');}
+  else{document.getElementById('p-nama').value='';document.getElementById('p-hp').value='';document.getElementById('p-team').value='Field Engineer';document.getElementById('p-status').value='aktif';const opts=getLokasiModal('Field Engineer');document.getElementById('p-lokasi').innerHTML=opts.map(o=>`<option value="${esc(o)}">${o}</option>`).join('');}
   openModal('modalPersonil');
 }
 function savePersonil(){
@@ -1261,7 +1569,6 @@ function confirmHapusPersonil(idx){showConfirm('Hapus Personil?',`Personil "${pe
 
 /* ===== USER MANAGEMENT ===== */
 function saveUsersData(){try{localStorage.setItem('appUsers',JSON.stringify(appUsers));}catch(e){}}
-
 function renderUsers(){
   const q=(document.getElementById('userFilter').value||'').toLowerCase();
   const rf=document.getElementById('userRoleFilter').value;
@@ -1273,96 +1580,49 @@ function renderUsers(){
   if(!data.length){cont.innerHTML='<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-users-slash"></i><p>Tidak ada user ditemukan</p><span>Tambah user menggunakan tombol di atas</span></div>';return;}
   cont.innerHTML=data.map(u=>{
     const idx=appUsers.indexOf(u);
-    const col=ROLE_COLORS[u.role]||COLORS[0];
-    const ini=getInitial(u.name);
+    const col=ROLE_COLORS[u.role]||COLORS[0];const ini=getInitial(u.name);
     const isMe=currentUser&&(u.id===currentUser.id||u.username===currentUser.username);
     const roleBadge={Administrator:'badge-g',Supervisor:'badge-b',Petugas:'badge-p'}[u.role]||'badge-a';
     const canDelete=currentUser?.role==='Administrator'&&!isMe;
     return `<div class="user-card">
       ${isMe?'<span class="badge badge-g user-admin-badge" style="position:absolute;top:12px;right:12px"><i class="fas fa-circle" style="font-size:6px"></i> Anda</span>':''}
-      <div class="user-card-top">
-        <div class="user-ava" style="background:${col};color:#000">${ini}</div>
-        <div>
-          <div class="user-name">${u.name}</div>
-          <div class="user-uname"><i class="fas fa-at" style="font-size:9px;color:var(--dim)"></i> ${u.username}</div>
-        </div>
-      </div>
+      <div class="user-card-top"><div class="user-ava" style="background:${col};color:#000">${ini}</div><div><div class="user-name">${u.name}</div><div class="user-uname"><i class="fas fa-at" style="font-size:9px;color:var(--dim)"></i> ${u.username}</div></div></div>
       <div class="user-info-row"><i class="fas fa-user-tag"></i><span class="badge ${roleBadge}">${u.role}</span></div>
       <div class="user-info-row"><i class="fas fa-circle" style="font-size:7px;color:${u.status==='aktif'?'var(--green)':'var(--red)'}"></i><span class="badge ${u.status==='aktif'?'badge-g':'badge-r'}">${u.status==='aktif'?'Aktif':'Non-aktif'}</span></div>
-      <div class="user-foot">
-        <button class="btn-sm" style="flex:1" onclick="openUserModal(${idx})"><i class="fas fa-pen"></i> Edit</button>
-        ${canDelete?`<button class="btn-sm btn-sm-red" onclick="confirmHapusUser(${idx})"><i class="fas fa-trash"></i></button>`:'<button class="btn-sm" disabled style="opacity:.4;cursor:not-allowed"><i class="fas fa-lock"></i></button>'}
-      </div>
+      <div class="user-foot"><button class="btn-sm" style="flex:1" onclick="openUserModal(${idx})"><i class="fas fa-pen"></i> Edit</button>${canDelete?`<button class="btn-sm btn-sm-red" onclick="confirmHapusUser(${idx})"><i class="fas fa-trash"></i></button>`:'<button class="btn-sm" disabled style="opacity:.4;cursor:not-allowed"><i class="fas fa-lock"></i></button>'}</div>
     </div>`;
   }).join('');
 }
-
 function openUserModal(idx=-1){
   if(currentUser?.role!=='Administrator'){showNotif('Akses ditolak!','red');return;}
   document.getElementById('editUserIdx').value=idx;
   document.getElementById('modalUserTitle').textContent=idx===-1?'Tambah User Baru':'Edit User';
-  const passNote=document.getElementById('passLabelNote');
-  const passHint=document.getElementById('passHintEdit');
-  if(idx>=0){
-    const u=appUsers[idx];
-    document.getElementById('u-nama').value=u.name;
-    document.getElementById('u-username').value=u.username;
-    document.getElementById('u-password').value='';
-    document.getElementById('u-role').value=u.role;
-    document.getElementById('u-status').value=u.status||'aktif';
-    passNote.textContent='(opsional untuk edit)';passHint.style.display='flex';
-  }else{
-    document.getElementById('u-nama').value='';document.getElementById('u-username').value='';
-    document.getElementById('u-password').value='';document.getElementById('u-role').value='Petugas';
-    document.getElementById('u-status').value='aktif';passNote.textContent='';passHint.style.display='none';
-  }
+  const passNote=document.getElementById('passLabelNote'),passHint=document.getElementById('passHintEdit');
+  if(idx>=0){const u=appUsers[idx];document.getElementById('u-nama').value=u.name;document.getElementById('u-username').value=u.username;document.getElementById('u-password').value='';document.getElementById('u-role').value=u.role;document.getElementById('u-status').value=u.status||'aktif';passNote.textContent='(opsional untuk edit)';passHint.style.display='flex';}
+  else{document.getElementById('u-nama').value='';document.getElementById('u-username').value='';document.getElementById('u-password').value='';document.getElementById('u-role').value='Petugas';document.getElementById('u-status').value='aktif';passNote.textContent='';passHint.style.display='none';}
   openModal('modalUser');
 }
-
 function saveUser(){
   if(currentUser?.role!=='Administrator'){showNotif('Akses ditolak!','red');return;}
-  const nama=document.getElementById('u-nama').value.trim();
-  const username=document.getElementById('u-username').value.trim();
-  const password=document.getElementById('u-password').value;
-  const role=document.getElementById('u-role').value;
-  const status=document.getElementById('u-status').value;
+  const nama=document.getElementById('u-nama').value.trim(),username=document.getElementById('u-username').value.trim(),password=document.getElementById('u-password').value,role=document.getElementById('u-role').value,status=document.getElementById('u-status').value;
   const idx=parseInt(document.getElementById('editUserIdx').value);
-
   if(!nama){showNotif('Nama wajib diisi!','red');return;}
   if(!username){showNotif('Username wajib diisi!','red');return;}
   if(!/^[a-zA-Z0-9_]+$/.test(username)){showNotif('Username hanya huruf, angka, underscore!','red');return;}
-
-  // Cek duplikat username
   const dupIdx=appUsers.findIndex((u,i)=>u.username===username&&i!==idx);
   if(dupIdx>=0){showNotif('Username sudah digunakan!','red');return;}
-
   if(idx===-1&&!password){showNotif('Password wajib diisi untuk user baru!','red');return;}
   if(password&&password.length<6){showNotif('Password minimal 6 karakter!','red');return;}
-
   if(idx>=0){
-    const u=appUsers[idx];
-    u.name=nama;u.username=username;u.role=role;u.status=status;
-    if(password)u.password=password;
-    // Update session jika user yang diedit adalah user yang login
-    if(currentUser&&(u.id===currentUser.id||u.username===currentUser.username)){
-      currentUser=u;try{sessionStorage.setItem('loggedUser',JSON.stringify(u));}catch(e){}
-      document.getElementById('sideName').textContent=u.name;document.getElementById('sideRole').textContent=u.role;
-    }
-  }else{
-    const newId=Date.now();
-    appUsers.push({id:newId,username,password,name:nama,role,status});
-  }
-  saveUsersData();renderUsers();closeModal('modalUser');
-  showNotif(idx>=0?'User diperbarui!':'User baru ditambahkan!','green');
-  updateSystemInfo();
+    const u=appUsers[idx];u.name=nama;u.username=username;u.role=role;u.status=status;if(password)u.password=password;
+    if(currentUser&&(u.id===currentUser.id||u.username===currentUser.username)){currentUser=u;try{sessionStorage.setItem('loggedUser',JSON.stringify(u));}catch(e){}document.getElementById('sideName').textContent=u.name;document.getElementById('sideRole').textContent=u.role;}
+  }else{appUsers.push({id:Date.now(),username,password,name:nama,role,status});}
+  saveUsersData();renderUsers();closeModal('modalUser');showNotif(idx>=0?'User diperbarui!':'User baru ditambahkan!','green');updateSystemInfo();
 }
-
 function confirmHapusUser(idx){
   const u=appUsers[idx];
   if(currentUser&&(u.id===currentUser.id||u.username===currentUser.username)){showNotif('Tidak bisa menghapus akun sendiri!','red');return;}
-  showConfirm('Hapus User?',`User "${u.name}" (@${u.username}) akan dihapus secara permanen.`,()=>{
-    appUsers.splice(idx,1);saveUsersData();renderUsers();showNotif('User dihapus','red');updateSystemInfo();
-  });
+  showConfirm('Hapus User?',`User "${u.name}" (@${u.username}) akan dihapus secara permanen.`,()=>{appUsers.splice(idx,1);saveUsersData();renderUsers();showNotif('User dihapus','red');updateSystemInfo();});
 }
 
 /* ===== SETTINGS ===== */
@@ -1371,8 +1631,12 @@ function loadSettings(){
   document.getElementById('set-nama').value=s.nama||'';document.getElementById('set-jabatan').value=s.jabatan||'';document.getElementById('set-unit').value=s.unit||'';
   document.getElementById('set-wa-default').value=s.waDefault||'';document.getElementById('set-wa-konfirm').checked=s.waKonfirm!==false;
   document.getElementById('set-lap-judul').value=s.lapJudul||'';
-  document.getElementById('set-show-masuk').checked=s.showMasuk!==false;document.getElementById('set-show-patroli').checked=s.showPatroli!==false;
-  document.getElementById('set-show-off').checked=s.showOff!==false;document.getElementById('set-show-report').checked=s.showReport!==false;
+  document.getElementById('set-show-masuk').checked=s.showMasuk!==false;
+  document.getElementById('set-show-stanby-fe').checked=s.showStanbyFe!==false;
+  document.getElementById('set-show-patroli').checked=s.showPatroli!==false;
+  document.getElementById('set-show-stanby-patroli').checked=s.showStanbyPatroli!==false;
+  document.getElementById('set-show-off').checked=s.showOff!==false;
+  document.getElementById('set-show-report').checked=s.showReport!==false;
   document.getElementById('set-notif').checked=s.notif!==false;document.getElementById('set-dark').checked=isDark;
 }
 function saveSettings(){
@@ -1382,8 +1646,12 @@ function saveSettings(){
   settings.waDefault=document.getElementById('set-wa-default')?.value.trim()||settings.waDefault||'';
   settings.waKonfirm=document.getElementById('set-wa-konfirm')?.checked??true;
   settings.lapJudul=document.getElementById('set-lap-judul')?.value.trim()||settings.lapJudul||'';
-  settings.showMasuk=document.getElementById('set-show-masuk')?.checked??true;settings.showPatroli=document.getElementById('set-show-patroli')?.checked??true;
-  settings.showOff=document.getElementById('set-show-off')?.checked??true;settings.showReport=document.getElementById('set-show-report')?.checked??true;
+  settings.showMasuk=document.getElementById('set-show-masuk')?.checked??true;
+  settings.showStanbyFe=document.getElementById('set-show-stanby-fe')?.checked??true;
+  settings.showPatroli=document.getElementById('set-show-patroli')?.checked??true;
+  settings.showStanbyPatroli=document.getElementById('set-show-stanby-patroli')?.checked??true;
+  settings.showOff=document.getElementById('set-show-off')?.checked??true;
+  settings.showReport=document.getElementById('set-show-report')?.checked??true;
   settings.notif=document.getElementById('set-notif')?.checked??true;settings.isDark=isDark;settings.sidebarCollapsed=sidebarCollapsed;
   try{localStorage.setItem('settings',JSON.stringify(settings));}catch(e){}
 }
