@@ -33,13 +33,12 @@ window.dispatchEvent(new Event('firebase-ready'));
 
 <style>
 /* =============================================
-   DESIGN TOKENS — REFINED PROFESSIONAL
+   DESIGN TOKENS
    ============================================= */
 :root {
   --ff: 'Plus Jakarta Sans', sans-serif;
   --fm: 'DM Mono', monospace;
 
-  /* Dark theme */
   --bg:        #0f1117;
   --bg2:       #181b23;
   --bg3:       #1e212c;
@@ -55,7 +54,6 @@ window.dispatchEvent(new Event('firebase-ready'));
   --muted:     #7a85a0;
   --dim:       #444d65;
 
-  /* Brand — lebih tenang, bukan neon */
   --green:     #2dd4a0;
   --green-s:   #1a9e72;
   --green-d:   rgba(45,212,160,0.10);
@@ -134,9 +132,6 @@ window.dispatchEvent(new Event('firebase-ready'));
   --sh-lg: 0 8px 28px rgba(0,0,0,0.11);
 }
 
-/* =============================================
-   RESET & BASE
-   ============================================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -156,9 +151,7 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border3); }
 
-/* =============================================
-   SYNC BAR
-   ============================================= */
+/* SYNC BAR */
 .sync-bar {
   position: fixed; top: 0; left: 0; right: 0; height: 2px;
   z-index: 9999; background: transparent; transition: background .3s;
@@ -182,9 +175,7 @@ body {
 .sync-dot-err { background: var(--red); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
 
-/* =============================================
-   LOGIN PAGE
-   ============================================= */
+/* LOGIN PAGE */
 .login-wrap {
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
@@ -292,12 +283,6 @@ body {
   font-size: 13px; color: var(--muted); cursor: pointer; user-select: none;
 }
 .lg-check input { width: 15px; height: 15px; accent-color: var(--green); cursor: pointer; }
-.lg-forgot {
-  font-size: 13px; color: var(--green); cursor: pointer;
-  background: none; border: none; font-family: var(--ff);
-  font-weight: 600; transition: opacity .15s;
-}
-.lg-forgot:hover { opacity: .7; }
 
 .btn-login {
   width: 100%; padding: 13px;
@@ -334,14 +319,10 @@ body {
 }
 .login-theme-btn:hover { color: var(--amber); background: var(--amber-d); }
 
-/* =============================================
-   APP SHELL
-   ============================================= */
+/* APP SHELL */
 .app-wrap { display: none; flex-direction: column; min-height: 100vh; }
 
-/* =============================================
-   SIDEBAR
-   ============================================= */
+/* SIDEBAR */
 .sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
@@ -436,9 +417,7 @@ body {
 .u-role { font-size: 10px; color: var(--muted); white-space: nowrap; }
 .u-ver  { font-size: 10px; color: var(--dim); margin-top: 8px; padding-left: 41px; white-space: nowrap; }
 
-/* =============================================
-   MAIN CONTENT
-   ============================================= */
+/* MAIN CONTENT */
 .main {
   margin-left: var(--sidebar-w);
   flex: 1; display: flex; flex-direction: column;
@@ -446,9 +425,7 @@ body {
 }
 .main.expanded { margin-left: 58px; }
 
-/* =============================================
-   TOPBAR
-   ============================================= */
+/* TOPBAR */
 .topbar {
   height: 56px; background: var(--bg2);
   border-bottom: 1px solid var(--border);
@@ -476,11 +453,6 @@ body {
   border-radius: var(--rx); border: 1px solid rgba(45,212,160,.18);
   white-space: nowrap;
 }
-.badge-on::before {
-  content: ''; width: 5px; height: 5px; border-radius: 50%;
-  background: var(--green); flex-shrink: 0;
-}
-
 .tb-date {
   font-size: 11px; font-weight: 500; color: var(--muted);
   background: var(--bg3); padding: 5px 11px;
@@ -498,15 +470,11 @@ body {
 .theme-btn:hover  { color: var(--amber); background: var(--amber-d); border-color: rgba(245,166,35,.25); }
 .tb-logout:hover  { background: var(--red-d); border-color: rgba(240,111,111,.25); color: var(--red); }
 
-/* =============================================
-   PAGES
-   ============================================= */
+/* PAGES */
 .page { display: none; flex: 1; flex-direction: column; }
 .page.active { display: flex; }
 
-/* =============================================
-   DASHBOARD LAYOUT
-   ============================================= */
+/* DASHBOARD LAYOUT */
 .dash-grid {
   display: grid;
   grid-template-columns: 1fr 360px;
@@ -521,9 +489,7 @@ body {
   gap: 12px; overflow-y: auto; background: var(--bg3);
 }
 
-/* =============================================
-   STAT CARDS — icon besar di kiri, angka di kanan
-   ============================================= */
+/* STAT CARDS */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -558,9 +524,7 @@ body {
 .stat-val { font-size: 20px; font-weight: 600; line-height: 1; color: var(--text); }
 .stat-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; font-weight: 500; }
 
-/* =============================================
-   MINI CHART
-   ============================================= */
+/* MINI CHART */
 .chart-section {
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: var(--r); padding: 13px 15px; margin-bottom: 14px;
@@ -585,9 +549,7 @@ body {
 .chart-bar { border-radius: 3px 3px 0 0; min-height: 2px; transition: height .3s ease; }
 .chart-day { font-size: 9px; color: var(--dim); text-align: center; font-family: var(--fm); }
 
-/* =============================================
-   FORM SECTIONS
-   ============================================= */
+/* FORM SECTIONS */
 .section {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -621,8 +583,6 @@ body {
   background: var(--bg4); padding: 3px 9px;
   border-radius: var(--rx); font-weight: 500;
 }
-
-.sec-body { padding: 13px; }
 
 input[type="date"] {
   flex: 1; background: var(--bg3);
@@ -751,7 +711,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .autosave-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--dim); transition: background .25s; }
 .autosave-indicator.saved .autosave-dot { background: var(--green); }
 
-/* Info box — border-left style, bukan warna penuh */
 .tips {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -763,9 +722,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 }
 .tips i { color: var(--green); flex-shrink: 0; margin-top: 1px; }
 
-/* =============================================
-   PREVIEW PANEL
-   ============================================= */
+/* PREVIEW PANEL */
 .prev-hdr { display: flex; align-items: center; justify-content: space-between; }
 .prev-title {
   font-size: 13px; font-weight: 700; color: var(--text);
@@ -832,9 +789,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .wa-inp:focus { border-color: #25d366; box-shadow: 0 0 0 3px rgba(37,211,102,.10); }
 .wa-inp::placeholder { color: var(--dim); }
 
-/* =============================================
-   PAGE INNER COMMON
-   ============================================= */
+/* PAGE INNER COMMON */
 .page-inner { padding: 18px; overflow-y: auto; flex: 1; }
 
 .page-hdr {
@@ -883,9 +838,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .filter-inp:focus { border-color: var(--border2); }
 .filter-inp::placeholder { color: var(--dim); }
 
-/* =============================================
-   TABLE
-   ============================================= */
+/* TABLE */
 .lap-table { width: 100%; border-collapse: collapse; }
 .lap-table th {
   background: var(--bg3); border: 1px solid var(--border);
@@ -917,9 +870,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .empty-state p { font-size: 14px; margin-bottom: 5px; font-weight: 600; }
 .empty-state span { font-size: 12px; color: var(--dim); }
 
-/* =============================================
-   PERSONIL CARDS
-   ============================================= */
+/* PERSONIL CARDS */
 .personil-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr));
   gap: 10px;
@@ -945,9 +896,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .pc-row i { width: 13px; text-align: center; font-size: 11px; color: var(--dim); }
 .pc-foot { display: flex; gap: 7px; padding-top: 13px; border-top: 1px solid var(--border); }
 
-/* =============================================
-   USER CARDS
-   ============================================= */
+/* USER CARDS */
 .user-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
   gap: 10px;
@@ -972,12 +921,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .user-info-row i { width: 13px; text-align: center; color: var(--dim); font-size: 11px; }
 .user-foot { display: flex; gap: 7px; padding-top: 13px; border-top: 1px solid var(--border); margin-top: 13px; }
 
-/* =============================================
-   PENGATURAN — 2 TAB SAJA
-   ============================================= */
+/* PENGATURAN */
 .sett-wrap { flex: 1; display: flex; flex-direction: column; }
 
-/* Tab bar */
 .sett-tabs {
   display: flex; gap: 4px; padding: 14px 18px 0;
   border-bottom: 1px solid var(--border);
@@ -1045,9 +991,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .toggle input:checked + .toggle-slider { background: var(--green); border-color: var(--green); }
 .toggle input:checked + .toggle-slider::before { transform: translateX(18px); background: #fff; }
 
-/* =============================================
-   MODALS
-   ============================================= */
+/* MODALS */
 .modal-bg {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.65); z-index: 999;
@@ -1150,9 +1094,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 }
 .det-acts { display: flex; gap: 7px; flex-wrap: wrap; }
 
-/* =============================================
-   TOAST
-   ============================================= */
+/* TOAST */
 .notif {
   position: fixed; bottom: 22px; right: 22px;
   background: var(--bg2); border: 1px solid var(--border2);
@@ -1171,9 +1113,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   font-size: 12px; flex-shrink: 0;
 }
 
-/* =============================================
-   RESPONSIVE
-   ============================================= */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .dash-grid { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: repeat(3,1fr); }
@@ -1331,6 +1271,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           <div class="chart-body" id="miniChart"></div>
         </div>
 
+        <!-- SECTION 1: TANGGAL -->
         <div class="section">
           <div class="sec-hdr"><div class="sec-num sn-g">1</div><i class="fas fa-calendar-days" style="color:var(--green);font-size:11px"></i><div class="sec-title">Tanggal</div></div>
           <div class="sec-body">
@@ -1339,6 +1280,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
         </div>
 
+        <!-- SECTION 2: FE MASUK -->
         <div class="section">
           <div class="sec-hdr">
             <div class="sec-num sn-g">2</div><i class="fas fa-wrench" style="color:var(--green);font-size:11px"></i>
@@ -1351,6 +1293,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
         </div>
 
+        <!-- SECTION 3: FE STANDBY -->
         <div class="section">
           <div class="sec-hdr">
             <div class="sec-num sn-b">3</div><i class="fas fa-pause-circle" style="color:var(--blue);font-size:11px"></i>
@@ -1363,6 +1306,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
         </div>
 
+        <!-- SECTION 4: PATROLI MASUK -->
         <div class="section">
           <div class="sec-hdr">
             <div class="sec-num sn-c">4</div><i class="fas fa-shield-halved" style="color:var(--cyan);font-size:11px"></i>
@@ -1375,6 +1319,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
         </div>
 
+        <!-- SECTION 5: PATROLI STANDBY -->
         <div class="section">
           <div class="sec-hdr">
             <div class="sec-num sn-o">5</div><i class="fas fa-moon" style="color:var(--orange);font-size:11px"></i>
@@ -1387,9 +1332,23 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
         </div>
 
+        <!-- FIX #1: SECTION 6 OFF — container id="off-rows" sekarang ada -->
         <div class="section">
           <div class="sec-hdr">
-            <div class="sec-num sn-a">6</div><i class="fas fa-clipboard-list" style="color:var(--amber);font-size:11px"></i>
+            <div class="sec-num sn-r">6</div><i class="fas fa-user-xmark" style="color:var(--red);font-size:11px"></i>
+            <div class="sec-title">Off / Tidak Hadir</div><span class="sec-count" id="cnt-off">0 orang</span>
+          </div>
+          <div class="sec-body">
+            <div class="tbl-hdr"><span>Nama</span><span>Keterangan</span><span></span></div>
+            <div id="off-rows"></div>
+            <button class="add-btn" onclick="addRow('off')"><i class="fas fa-plus"></i> Tambah Personil Off</button>
+          </div>
+        </div>
+
+        <!-- SECTION 7: REPORT (nomor diupdate dari 6 ke 7) -->
+        <div class="section">
+          <div class="sec-hdr">
+            <div class="sec-num sn-a">7</div><i class="fas fa-clipboard-list" style="color:var(--amber);font-size:11px"></i>
             <div class="sec-title">Report / PIC</div><span class="sec-count" id="cnt-report">0 kegiatan</span>
             <span class="report-auto-tag">3 Auto FE</span>
           </div>
@@ -1402,7 +1361,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
         </div>
 
         <div class="btn-row">
-          <button class="btn-gen" onclick="generateLaporan()"><i class="fas fa-file-export"></i> Generate & Simpan ke Cloud</button>
+          <button class="btn-gen" onclick="generateLaporan()"><i class="fas fa-file-export"></i> Generate &amp; Simpan ke Cloud</button>
           <button class="btn-rst" onclick="confirmReset()"><i class="fas fa-rotate-left"></i> Reset</button>
         </div>
         <div class="autosave-indicator" id="autosaveInd"><div class="autosave-dot"></div><span id="autosaveTxt">Draft belum disimpan</span></div>
@@ -1480,7 +1439,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
     </div>
   </div>
 
-  <!-- PENGATURAN — 2 TAB: Umum & Sistem -->
+  <!-- PENGATURAN -->
   <div class="page" id="page-pengaturan">
     <div class="sett-wrap">
       <div class="sett-tabs">
@@ -1488,15 +1447,14 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           <i class="fas fa-sliders"></i> Umum
         </div>
         <div class="sett-tab" id="tab-sistem" onclick="goSett('sistem',this)">
-          <i class="fas fa-database"></i> Sistem & Data
+          <i class="fas fa-database"></i> Sistem &amp; Data
         </div>
       </div>
 
       <div class="sett-content">
-        <!-- TAB UMUM: Profil + WA + Judul Laporan -->
         <div class="sett-panel active" id="sett-umum">
           <div class="sett-section">
-            <div class="sett-sec-title">Profil & Unit</div>
+            <div class="sett-sec-title">Profil &amp; Unit</div>
             <div class="sett-sec-sub">Nama dan unit tampil di header laporan yang digenerate.</div>
             <div class="sett-card">
               <div class="sett-row">
@@ -1533,7 +1491,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
         </div>
 
-        <!-- TAB SISTEM -->
         <div class="sett-panel" id="sett-sistem">
           <div class="sett-section">
             <div class="sett-sec-title">Tampilan</div>
@@ -1550,7 +1507,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
 
           <div class="sett-section">
-            <div class="sett-sec-title">Firebase & Data</div>
+            <div class="sett-sec-title">Firebase &amp; Data</div>
             <div class="sett-card">
               <div class="sett-row">
                 <div><div class="sett-row-lbl">Status Koneksi</div></div>
@@ -1960,7 +1917,10 @@ function buildAutoReportRows(){
 
 function refreshAutoReportPic(){
   const pic=getFirstFEName()||'—';
-  document.querySelectorAll('.row-input-auto-pic').forEach(el=>{el.value=pic;});
+  document.querySelectorAll('.row-input-auto-pic').forEach(el=>{
+    /* hanya update jika masih sama dengan nama FE sebelumnya atau masih '—' */
+    el.value=pic;
+  });
 }
 
 function buildDatalist(){
@@ -1970,6 +1930,7 @@ function buildDatalist(){
   personilList.filter(p=>p.status==='aktif'||!p.status).forEach(p=>{const o=document.createElement('option');o.value=p.nama;dl.appendChild(o);});
 }
 
+/* FIX #2: gunakan oninput (bukan onchange) agar PIC auto-update realtime saat mengetik */
 function addRow(s,c1='',c2=''){
   if(s==='report'){
     const cont=document.getElementById('report-rows');const d=document.createElement('div');d.className='row-item';
@@ -1989,7 +1950,8 @@ function addRow(s,c1='',c2=''){
     const cont=document.getElementById(s+'-rows');const d=document.createElement('div');d.className='row-item';
     const opts=getLokasiBySection(s);
     const lokasiHTML=buildLokasiHTML(opts,c2);
-    const extraAttr=(s==='masuk')?' onchange="onFENameChange(this)"':'';
+    /* FIX #2: oninput menggantikan onchange agar PIC di auto-report langsung berubah saat mengetik */
+    const extraAttr=(s==='masuk')?' oninput="onFENameChange(this)"':'';
     d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()"${extraAttr}>`
       +`<select class="row-select" oninput="onInputChange()">${lokasiHTML}</select>`
       +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
@@ -2013,10 +1975,13 @@ function updateStats(){
   document.getElementById('st-patroli').textContent=np;document.getElementById('cnt-patroli').textContent=np+' orang';
   const nsp=document.getElementById('stanby-patroli-rows').querySelectorAll('.row-item').length;
   document.getElementById('st-stanby-patroli').textContent=nsp;document.getElementById('cnt-stanby-patroli').textContent=nsp+' orang';
+
+  /* FIX #1: off-rows sekarang ada, stat Off berfungsi */
   const offRows=document.getElementById('off-rows');
   const no=offRows?offRows.querySelectorAll('.row-item').length:0;
-  if(document.getElementById('st-off'))document.getElementById('st-off').textContent=no;
-  if(document.getElementById('cnt-off'))document.getElementById('cnt-off').textContent=no+' orang';
+  document.getElementById('st-off').textContent=no;
+  document.getElementById('cnt-off').textContent=no+' orang';
+
   const nr=getAllReportRows().filter(r=>r.col1).length;
   document.getElementById('st-report').textContent=nr;document.getElementById('cnt-report').textContent=nr+' kegiatan';
   updateLapBadge();
@@ -2064,23 +2029,61 @@ async function generateLaporan(){
   const unit=settings.unit?'\nUnit : '+settings.unit:'';
   const SEP='═'.repeat(36);const SEP2='─'.repeat(36);
   let txt=judul+unit+'\n'+tglStr+'\n'+SEP+'\n\n';
+
   const feMasuk=getRows('masuk').filter(r=>r.col1);
   const feStanby=getRows('stanby-fe').filter(r=>r.col1);
   const patroliMasuk=getRows('patroli').filter(r=>r.col1);
   const patroliStanby=getRows('stanby-patroli').filter(r=>r.col1);
+  /* FIX #1: off-rows sudah ada, data Off sekarang terbaca */
   const offRows=getRows('off').filter(r=>r.col1);
   const allReport=getAllReportRows().filter(r=>r.col1);
-  txt+='👷 FIELD ENGINEER — MASUK\n'+SEP2+'\n';if(!feMasuk.length)txt+='  (Tidak ada)\n';else feMasuk.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');txt+='\n';
-  txt+='⏸ FIELD ENGINEER — STANDBY\n'+SEP2+'\n';if(!feStanby.length)txt+='  (Tidak ada)\n';else feStanby.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');txt+='\n';
-  txt+='🛡 TIM PATROLI — MASUK\n'+SEP2+'\n';if(!patroliMasuk.length)txt+='  (Tidak ada)\n';else patroliMasuk.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');txt+='\n';
-  txt+='🌙 TIM PATROLI — STANDBY\n'+SEP2+'\n';if(!patroliStanby.length)txt+='  (Tidak ada)\n';else patroliStanby.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');txt+='\n';
-  txt+='❌ OFF / TIDAK HADIR\n'+SEP2+'\n';if(!offRows.length)txt+='  (Tidak ada)\n';else offRows.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');txt+='\n';
-  txt+='📋 REPORT / PIC\n'+SEP2+'\n';if(!allReport.length)txt+='  (Tidak ada)\n';else allReport.forEach(r=>txt+='  ✦ '+r.col1.padEnd(24)+': '+r.col2+'\n');txt+='\n';
+
+  txt+='👷 FIELD ENGINEER — MASUK\n'+SEP2+'\n';
+  if(!feMasuk.length)txt+='  (Tidak ada)\n';
+  else feMasuk.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+  txt+='\n';
+
+  txt+='⏸ FIELD ENGINEER — STANDBY\n'+SEP2+'\n';
+  if(!feStanby.length)txt+='  (Tidak ada)\n';
+  else feStanby.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+  txt+='\n';
+
+  txt+='🛡 TIM PATROLI — MASUK\n'+SEP2+'\n';
+  if(!patroliMasuk.length)txt+='  (Tidak ada)\n';
+  else patroliMasuk.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+  txt+='\n';
+
+  txt+='🌙 TIM PATROLI — STANDBY\n'+SEP2+'\n';
+  if(!patroliStanby.length)txt+='  (Tidak ada)\n';
+  else patroliStanby.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+  txt+='\n';
+
+  txt+='❌ OFF / TIDAK HADIR\n'+SEP2+'\n';
+  if(!offRows.length)txt+='  (Tidak ada)\n';
+  else offRows.forEach(r=>txt+='  ✦ '+r.col1.padEnd(22)+': '+r.col2+'\n');
+  txt+='\n';
+
+  txt+='📋 REPORT / PIC\n'+SEP2+'\n';
+  if(!allReport.length)txt+='  (Tidak ada)\n';
+  else allReport.forEach(r=>txt+='  ✦ '+r.col1.padEnd(24)+': '+r.col2+'\n');
+  txt+='\n';
+
   txt+=SEP;
   laporan=txt.trimEnd();
   renderPreview(laporan);updateStats();
+
   const docId='lap-'+tgl;
-  const obj={tgl,tglStr,laporan,masuk:getRows('masuk'),'stanby-fe':getRows('stanby-fe'),patroli:getRows('patroli'),'stanby-patroli':getRows('stanby-patroli'),off:getRows('off'),report:getAllReportRows(),createdBy:currentUser?.name||'',createdAt:new Date().toLocaleString('id-ID')};
+  const obj={
+    tgl,tglStr,laporan,
+    masuk:getRows('masuk'),
+    'stanby-fe':getRows('stanby-fe'),
+    patroli:getRows('patroli'),
+    'stanby-patroli':getRows('stanby-patroli'),
+    off:getRows('off'),
+    report:getAllReportRows(),
+    createdBy:currentUser?.name||'',
+    createdAt:new Date().toLocaleString('id-ID')
+  };
   await fbSet('arsip',docId,obj);
   showNotif('Laporan tersimpan ke Firebase Cloud!','green');
 }
@@ -2115,7 +2118,15 @@ function scheduleAutosave(){
   autosaveTimer=setTimeout(()=>{saveDraft();ind.classList.add('saved');txt.textContent='Draft tersimpan · '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});},1200);
 }
 function saveDraft(){
-  const draft={tgl:document.getElementById('tanggal').value,masuk:getRows('masuk'),'stanby-fe':getRows('stanby-fe'),patroli:getRows('patroli'),'stanby-patroli':getRows('stanby-patroli'),off:getRows('off'),report:getManualReportRows()};
+  const draft={
+    tgl:document.getElementById('tanggal').value,
+    masuk:getRows('masuk'),
+    'stanby-fe':getRows('stanby-fe'),
+    patroli:getRows('patroli'),
+    'stanby-patroli':getRows('stanby-patroli'),
+    off:getRows('off'),
+    report:getManualReportRows()
+  };
   try{localStorage.setItem('draft',JSON.stringify(draft));}catch(e){}
 }
 function loadDraft(){
@@ -2124,7 +2135,10 @@ function loadDraft(){
     const d=JSON.parse(localStorage.getItem('draft')||'null');
     if(!d)return loadDefaults();
     if(d.tgl){document.getElementById('tanggal').value=d.tgl;document.getElementById('tglFmt').textContent=fmtDate(d.tgl);}
-    ['masuk','stanby-fe','patroli','stanby-patroli','off'].forEach(s=>{document.getElementById(s+'-rows').innerHTML='';(d[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));});
+    ['masuk','stanby-fe','patroli','stanby-patroli','off'].forEach(s=>{
+      document.getElementById(s+'-rows').innerHTML='';
+      (d[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));
+    });
     document.getElementById('report-rows').innerHTML='';
     (d.report||[]).forEach(r=>addRow('report',r.col1,r.col2));
     refreshAutoReportPic();
@@ -2152,7 +2166,9 @@ function loadDefaults(){
 /* ===== RESET ===== */
 function confirmReset(){
   showConfirm('Reset Form?','Semua isi form akan dikosongkan.',()=>{
-    ['masuk','stanby-fe','patroli','stanby-patroli','off','report'].forEach(s=>document.getElementById(s+'-rows').innerHTML='');
+    ['masuk','stanby-fe','patroli','stanby-patroli','off','report'].forEach(s=>{
+      const el=document.getElementById(s+'-rows');if(el)el.innerHTML='';
+    });
     buildAutoReportRows();initDate();laporan='';document.getElementById('previewBox').textContent='Isi form di sebelah kiri...';
     localStorage.removeItem('draft');updateStats();
     document.getElementById('autosaveInd').classList.remove('saved');document.getElementById('autosaveTxt').textContent='Draft belum disimpan';
@@ -2200,7 +2216,10 @@ function muatLaporan(id){
   setTimeout(()=>{
     document.getElementById('tanggal').value=a.tgl;
     document.getElementById('tglFmt').textContent=fmtDate(a.tgl);
-    ['masuk','stanby-fe','patroli','stanby-patroli','off'].forEach(s=>{document.getElementById(s+'-rows').innerHTML='';(a[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));});
+    ['masuk','stanby-fe','patroli','stanby-patroli','off'].forEach(s=>{
+      document.getElementById(s+'-rows').innerHTML='';
+      (a[s]||[]).forEach(r=>addRow(s,r.col1,r.col2));
+    });
     buildAutoReportRows();
     document.getElementById('report-rows').innerHTML='';
     const saved=(a.report||[]).filter(r=>!REPORT_AUTO.includes(r.col1));
