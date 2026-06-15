@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jadwal Harian Network Indonesia Timur</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <!-- Firebase SDK -->
@@ -36,14 +36,18 @@ window.dispatchEvent(new Event('firebase-ready'));
    DESIGN TOKENS
    ============================================= */
 :root {
-  --ff: 'Plus Jakarta Sans', sans-serif;
+  --ff: 'Inter', 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
   --fm: 'DM Mono', monospace;
 
-  --bg:        #0f1117;
-  --bg2:       #181b23;
-  --bg3:       #1e212c;
-  --bg4:       #23273a;
-  --bg5:       #2a2f42;
+  --bg:        #0b1020;
+  --bg2:       #12182a;
+  --bg3:       #182033;
+  --bg4:       #20293d;
+  --bg5:       #27324a;
+  --glass:     rgba(15, 23, 42, 0.68);
+  --accent1:   #34d399;
+  --accent2:   #38bdf8;
+  --accent3:   #8b5cf6;
 
   --border:    rgba(255,255,255,0.07);
   --border2:   rgba(255,255,255,0.12);
@@ -84,16 +88,20 @@ window.dispatchEvent(new Event('firebase-ready'));
   --tr: 0.15s ease;
 
   --sh-sm: 0 1px 3px rgba(0,0,0,0.3);
-  --sh-md: 0 4px 14px rgba(0,0,0,0.35);
-  --sh-lg: 0 8px 28px rgba(0,0,0,0.4);
+  --sh-md: 0 6px 18px rgba(15,23,42,0.32);
+  --sh-lg: 0 14px 36px rgba(15,23,42,0.42);
 }
 
 [data-theme="light"] {
-  --bg:        #f4f5f8;
+  --bg:        #eff5ff;
   --bg2:       #ffffff;
-  --bg3:       #f8f9fb;
-  --bg4:       #eef0f5;
-  --bg5:       #e5e8f0;
+  --bg3:       #f5f7ff;
+  --bg4:       #edf2ff;
+  --bg5:       #e5ebff;
+  --glass:     rgba(255, 255, 255, 0.78);
+  --accent1:   #0ea5a4;
+  --accent2:   #2563eb;
+  --accent3:   #7c3aed;
 
   --border:    rgba(0,0,0,0.07);
   --border2:   rgba(0,0,0,0.12);
@@ -127,23 +135,45 @@ window.dispatchEvent(new Event('firebase-ready'));
   --orange:    #ea580c;
   --orange-d:  rgba(234,88,12,0.09);
 
-  --sh-sm: 0 1px 3px rgba(0,0,0,0.07);
-  --sh-md: 0 4px 14px rgba(0,0,0,0.09);
-  --sh-lg: 0 8px 28px rgba(0,0,0,0.11);
+  --sh-sm: 0 1px 3px rgba(15,23,42,0.08);
+  --sh-md: 0 8px 18px rgba(15,23,42,0.10);
+  --sh-lg: 0 14px 30px rgba(15,23,42,0.14);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: var(--ff);
-  background: var(--bg);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background:
+    radial-gradient(circle at top, rgba(52, 211, 153, 0.10), transparent 22%),
+    radial-gradient(circle at right top, rgba(56, 189, 248, 0.12), transparent 18%),
+    radial-gradient(circle at left bottom, rgba(139, 92, 246, 0.10), transparent 20%),
+    linear-gradient(135deg, var(--bg) 0%, #111827 42%, color-mix(in srgb, var(--bg) 90%, #0f172a) 100%);
   color: var(--text);
   min-height: 100vh;
   font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   transition: background .25s, color .25s;
+  position: relative;
+  overflow-x: hidden;
 }
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: auto;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .12;
+  pointer-events: none;
+  z-index: 0;
+}
+body::before { top: -60px; left: -80px; background: linear-gradient(135deg, var(--accent1), var(--accent2)); }
+body::after  { right: -80px; bottom: -100px; background: linear-gradient(135deg, var(--accent2), var(--accent3)); }
 
 ::selection { background: var(--green-g); color: var(--text); }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -198,9 +228,12 @@ body {
 }
 
 .login-card {
-  background: var(--bg2);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--glass) 92%, var(--bg2)) 0%, var(--glass) 100%);
   border: 1px solid var(--border2);
-  border-radius: 18px;
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   width: 420px; max-width: 100%;
   padding: 36px 32px;
   position: relative; z-index: 1;
@@ -230,8 +263,8 @@ body {
   border-radius: var(--rx); padding: 4px 11px; margin-bottom: 18px;
 }
 
-.login-title    { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-.login-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.login-title    { font-size: 19px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.02em; }
+  .login-subtitle { font-size: 12.5px; color: var(--muted); margin-bottom: 24px; line-height: 1.55; }
 
 .lg-err {
   display: none; align-items: center; gap: 10px;
@@ -326,8 +359,9 @@ body {
 .sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
-  background: var(--bg2);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #0b1220) 0%, var(--bg2) 100%);
   border-right: 1px solid var(--border);
+  box-shadow: 8px 0 24px rgba(0,0,0,0.18);
   display: flex; flex-direction: column;
   position: fixed; top: 0; left: 0; z-index: 200;
   transition: transform .3s cubic-bezier(.4,0,.2,1), width .25s;
@@ -383,8 +417,8 @@ body {
   user-select: none; white-space: nowrap;
   position: relative; overflow: hidden;
 }
-.nav-item:hover { background: var(--bg3); color: var(--text); }
-.nav-item.active { background: var(--green-d); color: var(--green); }
+.nav-item:hover { background: linear-gradient(135deg, var(--bg3), color-mix(in srgb, var(--bg3) 80%, var(--green-d))); color: var(--text); }
+.nav-item.active { background: linear-gradient(135deg, var(--green-d), color-mix(in srgb, var(--green-d) 60%, var(--bg3))); color: var(--green); box-shadow: inset 0 0 0 1px rgba(45,212,160,0.18); }
 .nav-item.active::before {
   content: ''; position: absolute; left: 0; top: 28%; bottom: 28%;
   width: 2.5px; background: var(--green); border-radius: 0 2px 2px 0;
@@ -427,8 +461,10 @@ body {
 
 /* TOPBAR */
 .topbar {
-  height: 56px; background: var(--bg2);
+  height: 56px; background: rgba(24,27,35,0.78);
   border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   display: flex; align-items: center;
   padding: 0 18px; gap: 10px;
   position: sticky; top: 0; z-index: 90;
@@ -496,8 +532,9 @@ body {
   gap: 8px; margin-bottom: 14px;
 }
 .stat-card {
-  background: var(--bg2);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #111827) 0%, var(--bg2) 100%);
   border: 1px solid var(--border);
+  box-shadow: var(--sh-sm);
   border-radius: var(--r); padding: 13px 14px;
   transition: border .15s, transform .15s;
   display: flex; align-items: center; gap: 12px;
@@ -551,8 +588,9 @@ body {
 
 /* FORM SECTIONS */
 .section {
-  background: var(--bg2);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #121722) 0%, var(--bg2) 100%);
   border: 1px solid var(--border);
+  box-shadow: var(--sh-sm);
   border-radius: var(--r);
   margin-bottom: 10px; overflow: hidden;
   transition: border .15s;
@@ -684,7 +722,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .btn-row { display: flex; gap: 10px; margin-top: 18px; }
 .btn-gen {
   flex: 1; padding: 12px 18px;
-  background: var(--green);
+  background: linear-gradient(135deg, var(--green), var(--green-s));
+  box-shadow: 0 10px 18px rgba(45,212,160,0.18);
   border: none; border-radius: var(--r); color: #fff;
   font-family: var(--ff); font-size: 14px; font-weight: 600;
   cursor: pointer; display: flex; align-items: center;
@@ -736,7 +775,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 }
 
 .prev-box {
-  background: var(--bg2); border: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #121722) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--sh-sm);
   border-radius: var(--r); font-family: var(--fm);
   font-size: 11.5px; line-height: 2; color: var(--text);
   white-space: pre-wrap; padding: 15px;
@@ -747,7 +788,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 
 .btn-wa {
   width: 100%; padding: 12px;
-  background: #25d366;
+  background: linear-gradient(135deg, #25d366, #1fae57);
+  box-shadow: 0 10px 18px rgba(37,211,102,0.18);
   border: none; border-radius: var(--r); color: #fff;
   font-family: var(--ff); font-size: 14px; font-weight: 600;
   cursor: pointer; display: flex; align-items: center;
@@ -763,7 +805,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   cursor: pointer; display: flex; align-items: center;
   justify-content: center; gap: 7px; transition: all .15s;
 }
-.btn-outline:hover { border-color: var(--border3); color: var(--text); }
+.btn-outline:hover { border-color: var(--green); color: var(--text); background: var(--green-d); }
 
 .wa-cfg {
   background: var(--bg2); border: 1px solid var(--border);
@@ -797,12 +839,13 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   justify-content: space-between;
   margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
 }
-.page-hdr-title { font-size: 16px; font-weight: 700; }
+.page-hdr-title { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
 .page-hdr-sub   { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
 .btn-primary {
   padding: 9px 16px;
-  background: var(--green);
+  background: linear-gradient(135deg, var(--green), var(--green-s));
+  box-shadow: 0 8px 16px rgba(45,212,160,0.16);
   border: none; border-radius: var(--rs); color: #fff;
   font-family: var(--ff); font-size: 13px; font-weight: 600;
   cursor: pointer; display: flex; align-items: center; gap: 7px;
@@ -876,8 +919,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   gap: 10px;
 }
 .personil-card {
-  background: var(--bg2); border: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #121722) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border);
   border-radius: var(--r); padding: 16px;
+  box-shadow: var(--sh-sm);
   transition: border .15s, transform .15s;
 }
 .personil-card:hover {
@@ -902,8 +947,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   gap: 10px;
 }
 .user-card {
-  background: var(--bg2); border: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #121722) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border);
   border-radius: var(--r); padding: 16px;
+  box-shadow: var(--sh-sm);
   transition: border .15s, transform .15s; position: relative;
 }
 .user-card:hover {
@@ -940,8 +987,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 }
 .sett-tab:hover { color: var(--text); background: var(--bg3); }
 .sett-tab.active {
-  color: var(--text); background: var(--bg);
-  border-color: var(--border); border-bottom-color: var(--bg);
+  color: var(--text); background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 90%, #111827) 100%);
+  border-color: var(--border); border-bottom-color: transparent;
+  box-shadow: inset 0 -2px 0 var(--green);
 }
 .sett-tab i { font-size: 13px; }
 
@@ -954,8 +1002,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .sett-sec-sub   { font-size: 12px; color: var(--muted); margin-bottom: 13px; }
 
 .sett-card {
-  background: var(--bg2); border: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #121722) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border);
   border-radius: var(--r); overflow: hidden;
+  box-shadow: var(--sh-sm);
 }
 .sett-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -1000,8 +1050,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 }
 .modal-bg.open { display: flex; }
 .modal {
-  background: var(--bg2); border: 1px solid var(--border2);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 96%, #121722) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border2);
   border-radius: 16px; width: 460px; max-width: 100%;
+  box-shadow: var(--sh-lg);
   max-height: 90vh; overflow-y: auto;
   animation: modalIn .2s cubic-bezier(.4,0,.2,1);
   box-shadow: var(--sh-lg);
@@ -1033,7 +1085,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   text-transform: uppercase; letter-spacing: .05em;
 }
 .form-inp {
-  width: 100%; background: var(--bg3);
+  width: 100%; background: linear-gradient(180deg, color-mix(in srgb, var(--bg3) 98%, #111827) 0%, var(--bg3) 100%);
   border: 1px solid var(--border); border-radius: var(--rs);
   color: var(--text); font-family: var(--ff); font-size: 14px;
   padding: 10px 12px; outline: none; transition: border .15s, box-shadow .15s;
@@ -1042,7 +1094,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 .form-inp::placeholder { color: var(--dim); }
 
 .form-select {
-  width: 100%; background: var(--bg3);
+  width: 100%; background: linear-gradient(180deg, color-mix(in srgb, var(--bg3) 98%, #111827) 0%, var(--bg3) 100%);
   border: 1px solid var(--border); border-radius: var(--rs);
   color: var(--text); font-family: var(--ff); font-size: 14px;
   padding: 10px 12px; outline: none; cursor: pointer; transition: border .15s;
@@ -1097,7 +1149,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 /* TOAST */
 .notif {
   position: fixed; bottom: 22px; right: 22px;
-  background: var(--bg2); border: 1px solid var(--border2);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 98%, #111827) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border2);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.35);
   border-radius: var(--r); padding: 12px 16px;
   font-size: 13px; font-weight: 500;
   display: flex; align-items: center; gap: 11px;
@@ -1114,6 +1168,48 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 }
 
 /* RESPONSIVE */
+@media (min-width: 769px) {
+  .app-wrap { display: flex; flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 0 14px;
+    z-index: 220;
+  }
+  .sidebar.collapsed { width: 100%; }
+  .s-logo { border-bottom: none; padding: 10px 0; min-height: auto; }
+  .s-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    overflow: visible;
+    padding: 6px 0;
+  }
+  .s-label { display: none; }
+  .nav-item { padding: 8px 10px; border-radius: 10px; }
+  .nav-item.active::before { display: none; }
+  .s-foot {
+    border-top: none;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .u-ver { display: none; }
+  .main, .main.expanded { margin-left: 0; }
+}
 @media (max-width: 900px) {
   .dash-grid { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: repeat(3,1fr); }
@@ -1155,7 +1251,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 
 <!-- ===================== LOGIN ===================== -->
 <div class="login-wrap" id="loginPage">
-  <button class="login-theme-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIconLogin"></i></button>
+  <button class="login-theme-btn" data-action="toggle-theme"><i class="fas fa-moon" id="themeIconLogin"></i></button>
   <div class="login-card">
     <div class="login-brand">
       <div class="login-brand-icon"><i class="fas fa-calendar-check"></i></div>
@@ -1180,13 +1276,13 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
       <div class="lg-inp-wrap">
         <i class="fas fa-lock lg-ico"></i>
         <input type="password" class="lg-inp has-eye" id="loginPass" placeholder="Masukkan password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
-        <button class="eye-btn" onclick="togglePass()"><i class="fas fa-eye" id="eyeIcon"></i></button>
+        <button class="eye-btn" data-action="toggle-pass"><i class="fas fa-eye" id="eyeIcon"></i></button>
       </div>
     </div>
     <div class="lg-row">
       <label class="lg-check"><input type="checkbox" id="rememberMe"> Ingat saya</label>
     </div>
-    <button class="btn-login" id="loginBtn" onclick="doLogin()">
+    <button class="btn-login" id="loginBtn" data-action="login">
       <div class="spin"></div>
       <span class="btn-login-txt"><i class="fas fa-right-to-bracket"></i>&nbsp; Masuk</span>
     </button>
@@ -1206,21 +1302,21 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   </div>
   <nav class="s-nav">
     <div class="s-label">Menu</div>
-    <div class="nav-item active" id="nav-dashboard" onclick="goPage('dashboard',this)">
+    <div class="nav-item active" id="nav-dashboard" data-action="page" data-page="dashboard">
       <i class="fas fa-house"></i><span class="nav-label-text">Dashboard</span>
     </div>
-    <div class="nav-item" id="nav-laporan" onclick="goPage('laporan',this)">
+    <div class="nav-item" id="nav-laporan" data-action="page" data-page="laporan">
       <i class="fas fa-file-lines"></i><span class="nav-label-text">Laporan</span>
       <span class="nav-badge" id="lapBadge" style="display:none">0</span>
     </div>
-    <div class="nav-item" id="nav-personil" onclick="goPage('personil',this)">
+    <div class="nav-item" id="nav-personil" data-action="page" data-page="personil">
       <i class="fas fa-users"></i><span class="nav-label-text">Personil</span>
     </div>
     <div class="s-label">Sistem</div>
-    <div class="nav-item nav-item-admin" id="nav-users" onclick="goPage('users',this)">
+    <div class="nav-item nav-item-admin" id="nav-users" data-action="page" data-page="users">
       <i class="fas fa-user-shield"></i><span class="nav-label-text">Kelola User</span>
     </div>
-    <div class="nav-item" id="nav-pengaturan" onclick="goPage('pengaturan',this)">
+    <div class="nav-item" id="nav-pengaturan" data-action="page" data-page="pengaturan">
       <i class="fas fa-gear"></i><span class="nav-label-text">Pengaturan</span>
     </div>
   </nav>
@@ -1235,16 +1331,16 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
     <div class="u-ver">v8.0 &copy; 2025 &mdash; Firebase</div>
   </div>
 </aside>
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+<div class="sidebar-overlay" id="sidebarOverlay" data-action="close-sidebar"></div>
 
 <div class="main" id="mainContent">
   <div class="topbar">
-    <button class="tb-hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <button class="tb-hamburger" data-action="toggle-sidebar"><i class="fas fa-bars"></i></button>
     <div class="tb-title" id="topTitle">Update Jadwal Harian</div>
     <div id="syncStatusEl" class="sync-indicator sync-ing"><div class="sync-dot sync-dot-ing"></div><span id="syncStatusTxt">Menghubungkan...</span></div>
     <div class="tb-date"><i class="far fa-calendar"></i> <span id="dateDisplay"></span></div>
-    <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIcon"></i></button>
-    <button class="tb-logout" onclick="confirmLogout()" title="Keluar"><i class="fas fa-right-from-bracket"></i></button>
+    <button class="theme-btn" data-action="toggle-theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+    <button class="tb-logout" data-action="logout" title="Keluar"><i class="fas fa-right-from-bracket"></i></button>
   </div>
 
   <!-- DASHBOARD -->
@@ -1289,7 +1385,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Lokasi</span><span></span></div>
             <div id="masuk-rows"></div>
-            <button class="add-btn" onclick="addRow('masuk')"><i class="fas fa-plus"></i> Tambah FE</button>
+            <button class="add-btn" data-action="add-row" data-section="masuk"><i class="fas fa-plus"></i> Tambah FE</button>
           </div>
         </div>
 
@@ -1302,7 +1398,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Lokasi Standby</span><span></span></div>
             <div id="stanby-fe-rows"></div>
-            <button class="add-btn" onclick="addRow('stanby-fe')"><i class="fas fa-plus"></i> Tambah FE Standby</button>
+            <button class="add-btn" data-action="add-row" data-section="stanby-fe"><i class="fas fa-plus"></i> Tambah FE Standby</button>
           </div>
         </div>
 
@@ -1315,7 +1411,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Lokasi Patroli</span><span></span></div>
             <div id="patroli-rows"></div>
-            <button class="add-btn" onclick="addRow('patroli')"><i class="fas fa-plus"></i> Tambah Personil Patroli</button>
+            <button class="add-btn" data-action="add-row" data-section="patroli"><i class="fas fa-plus"></i> Tambah Personil Patroli</button>
           </div>
         </div>
 
@@ -1328,7 +1424,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Lokasi Standby</span><span></span></div>
             <div id="stanby-patroli-rows"></div>
-            <button class="add-btn" onclick="addRow('stanby-patroli')"><i class="fas fa-plus"></i> Tambah Patroli Standby</button>
+            <button class="add-btn" data-action="add-row" data-section="stanby-patroli"><i class="fas fa-plus"></i> Tambah Patroli Standby</button>
           </div>
         </div>
 
@@ -1341,7 +1437,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           <div class="sec-body">
             <div class="tbl-hdr"><span>Nama</span><span>Keterangan</span><span></span></div>
             <div id="off-rows"></div>
-            <button class="add-btn" onclick="addRow('off')"><i class="fas fa-plus"></i> Tambah Personil Off</button>
+            <button class="add-btn" data-action="add-row" data-section="off"><i class="fas fa-plus"></i> Tambah Personil Off</button>
           </div>
         </div>
 
@@ -1356,13 +1452,13 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
             <div class="tbl-hdr"><span>Kegiatan</span><span>PIC</span><span></span></div>
             <div id="report-auto-rows"></div>
             <div id="report-rows"></div>
-            <button class="add-btn" onclick="addRow('report')"><i class="fas fa-plus"></i> Tambah Kegiatan</button>
+            <button class="add-btn" data-action="add-row" data-section="report"><i class="fas fa-plus"></i> Tambah Kegiatan</button>
           </div>
         </div>
 
         <div class="btn-row">
-          <button class="btn-gen" onclick="generateLaporan()"><i class="fas fa-file-export"></i> Generate &amp; Simpan ke Cloud</button>
-          <button class="btn-rst" onclick="confirmReset()"><i class="fas fa-rotate-left"></i> Reset</button>
+          <button class="btn-gen" data-action="generate-report"><i class="fas fa-file-export"></i> Generate &amp; Simpan ke Cloud</button>
+          <button class="btn-rst" data-action="reset-form"><i class="fas fa-rotate-left"></i> Reset</button>
         </div>
         <div class="autosave-indicator" id="autosaveInd"><div class="autosave-dot"></div><span id="autosaveTxt">Draft belum disimpan</span></div>
         <div class="tips"><i class="fas fa-cloud"></i><span>Data tersinkronisasi ke Firebase — semua perangkat akan melihat data yang sama secara realtime.</span></div>
@@ -1376,9 +1472,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
         </div>
         <div class="prev-box" id="previewBox">Isi form di sebelah kiri dan klik "Generate &amp; Simpan ke Cloud"...</div>
         <div class="act-btns">
-          <button class="btn-wa" onclick="kirimWA()"><i class="fab fa-whatsapp" style="font-size:16px"></i> Kirim ke WhatsApp</button>
-          <button class="btn-outline" onclick="salinClipboard()"><i class="fas fa-copy"></i> Salin ke Clipboard</button>
-          <button class="btn-outline" onclick="window.print()"><i class="fas fa-print"></i> Cetak / Simpan PDF</button>
+          <button class="btn-wa" data-action="send-wa"><i class="fab fa-whatsapp" style="font-size:16px"></i> Kirim ke WhatsApp</button>
+          <button class="btn-outline" data-action="copy-report"><i class="fas fa-copy"></i> Salin ke Clipboard</button>
+          <button class="btn-outline" data-action="print-page"><i class="fas fa-print"></i> Cetak / Simpan PDF</button>
         </div>
       </div>
     </div>
@@ -1389,12 +1485,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
     <div class="page-inner">
       <div class="page-hdr">
         <div><div class="page-hdr-title">Arsip Laporan</div><div class="page-hdr-sub">Riwayat laporan harian — tersinkronisasi dari Firebase</div></div>
-        <button class="btn-primary" onclick="goPage('dashboard',document.getElementById('nav-dashboard'))"><i class="fas fa-plus"></i> Buat Laporan</button>
+        <button class="btn-primary" data-action="page" data-page="dashboard"><i class="fas fa-plus"></i> Buat Laporan</button>
       </div>
       <div class="filter-row">
         <input type="text" class="filter-inp" id="lapFilter" placeholder="🔍 Cari laporan..." oninput="renderLaporan()" style="flex:1;min-width:140px">
         <input type="date" class="filter-inp" id="lapDate" oninput="renderLaporan()" style="width:160px">
-        <button class="btn-sm" onclick="clearLapFilter()"><i class="fas fa-xmark"></i> Reset</button>
+        <button class="btn-sm" data-action="clear-lap-filter"><i class="fas fa-xmark"></i> Reset</button>
       </div>
       <div id="laporan-list"></div>
     </div>
@@ -1405,7 +1501,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
     <div class="page-inner">
       <div class="page-hdr">
         <div><div class="page-hdr-title">Data Personil</div><div class="page-hdr-sub">Kelola daftar personil tim — tersinkronisasi Firebase</div></div>
-        <button class="btn-primary" onclick="openPersonilModal()"><i class="fas fa-user-plus"></i> Tambah Personil</button>
+        <button class="btn-primary" data-action="open-modal" data-modal="modalPersonil"><i class="fas fa-user-plus"></i> Tambah Personil</button>
       </div>
       <div class="filter-row">
         <input type="text" class="filter-inp" id="persFilter" placeholder="🔍 Cari nama / team..." oninput="renderPersonil()" style="flex:1;min-width:140px">
@@ -1424,7 +1520,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
     <div class="page-inner">
       <div class="page-hdr">
         <div><div class="page-hdr-title">Kelola User Login</div><div class="page-hdr-sub">Tambah, edit, dan hapus akun pengguna sistem</div></div>
-        <button class="btn-primary" onclick="openUserModal()"><i class="fas fa-user-plus"></i> Tambah User</button>
+        <button class="btn-primary" data-action="open-modal" data-modal="modalUser"><i class="fas fa-user-plus"></i> Tambah User</button>
       </div>
       <div class="filter-row">
         <input type="text" class="filter-inp" id="userFilter" placeholder="🔍 Cari nama / username..." oninput="renderUsers()" style="flex:1;min-width:140px">
@@ -1443,11 +1539,20 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
   <div class="page" id="page-pengaturan">
     <div class="sett-wrap">
       <div class="sett-tabs">
-        <div class="sett-tab active" id="tab-umum" onclick="goSett('umum',this)">
+        <div class="sett-tab active" id="tab-umum" data-action="sett" data-tab="umum">
           <i class="fas fa-sliders"></i> Umum
         </div>
-        <div class="sett-tab" id="tab-sistem" onclick="goSett('sistem',this)">
-          <i class="fas fa-database"></i> Sistem &amp; Data
+        <div class="sett-tab" id="tab-laporan" data-action="sett" data-tab="laporan">
+          <i class="fas fa-file-alt"></i> Laporan
+        </div>
+        <div class="sett-tab" id="tab-notif" data-action="sett" data-tab="notif">
+          <i class="fas fa-bell"></i> Notifikasi
+        </div>
+        <div class="sett-tab" id="tab-backup" data-action="sett" data-tab="backup">
+          <i class="fas fa-cloud-arrow-down"></i> Backup &amp; Restore
+        </div>
+        <div class="sett-tab" id="tab-keamanan" data-action="sett" data-tab="keamanan">
+          <i class="fas fa-shield-halved"></i> Keamanan
         </div>
       </div>
 
@@ -1491,6 +1596,74 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
           </div>
         </div>
 
+        <div class="sett-panel" id="sett-laporan">
+          <div class="sett-section">
+            <div class="sett-sec-title">Format Laporan</div>
+            <div class="sett-sec-sub">Atur template dan data default yang muncul saat generate laporan.</div>
+            <div class="sett-card">
+              <div class="sett-row">
+                <div><div class="sett-row-lbl">Judul default</div><div class="sett-row-sub">Teks utama di bagian atas laporan</div></div>
+                <input class="sett-inp" id="set-lap-judul" placeholder="UPDATE JADWAL HARIAN" oninput="saveSettings()">
+              </div>
+              <div class="sett-row">
+                <div><div class="sett-row-lbl">Format tanggal</div><div class="sett-row-sub">Pilih format tampilan tanggal laporan</div></div>
+                <select class="sett-inp" id="set-lap-format" onchange="saveSettings()"><option value="dd-mm-yyyy">DD/MM/YYYY</option><option value="yyyy-mm-dd" selected>YYYY-MM-DD</option></select>
+              </div>
+              <div class="sett-row">
+                <div><div class="sett-row-lbl">Nomor WA default</div><div class="sett-row-sub">Isi otomatis saat klik kirim laporan</div></div>
+                <input class="sett-inp" id="set-wa-default" placeholder="081234567890" oninput="saveSettings()">
+              </div>
+            </div>
+          </div>
+          <div class="sett-section">
+            <div class="sett-sec-title">Draft dan Sinkronisasi</div>
+            <div class="sett-card">
+              <div class="sett-row">
+                <div><div class="sett-row-lbl">Simpan draft otomatis</div><div class="sett-row-sub">Data tetap tersimpan saat browser tertutup</div></div>
+                <label class="toggle"><input type="checkbox" id="set-draft-auto" checked onchange="saveSettings()"><span class="toggle-slider"></span></label>
+              </div>
+              <div class="sett-row">
+                <div><div class="sett-row-lbl">Sinkron otomatis ke Firebase</div><div class="sett-row-sub">Setelah generate laporan</div></div>
+                <label class="toggle"><input type="checkbox" id="set-sync-auto" checked onchange="saveSettings()"><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sett-panel" id="sett-notif">
+          <div class="sett-section">
+            <div class="sett-sec-title">Pengingat</div>
+            <div class="sett-card">
+              <div class="sett-row"><div><div class="sett-row-lbl">Pengingat laporan harian</div><div class="sett-row-sub">Notifikasi saat jadwal belum diisi</div></div><label class="toggle"><input type="checkbox" id="set-reminder" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Notifikasi sinkronisasi</div><div class="sett-row-sub">Pesan berhasil/gagal upload ke cloud</div></div><label class="toggle"><input type="checkbox" id="set-sync-notif" checked onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Suara pemberitahuan</div><div class="sett-row-sub">Aktifkan efek suara untuk notifikasi</div></div><label class="toggle"><input type="checkbox" id="set-sound" onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sett-panel" id="sett-backup">
+          <div class="sett-section">
+            <div class="sett-sec-title">Cadangan dan Pulihkan</div>
+            <div class="sett-sec-sub">Jaga data tetap aman dan mudah dipindahkan antar perangkat.</div>
+            <div class="sett-card">
+              <div class="sett-row"><div><div class="sett-row-lbl">Ekspor data</div><div class="sett-row-sub">Unduh semua data sebagai file JSON</div></div><button class="btn-sm" data-action="export-data"><i class="fas fa-download"></i> Ekspor JSON</button></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Impor data</div><div class="sett-row-sub">Pulihkan backup dari file yang tersimpan</div></div><button class="btn-sm" data-action="import-data"><i class="fas fa-upload"></i> Impor Backup</button></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Reset draft lokal</div><div class="sett-row-sub">Hapus data sementara di browser</div></div><button class="btn-sm" data-action="clear-draft"><i class="fas fa-trash-can"></i> Reset Draft</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sett-panel" id="sett-keamanan">
+          <div class="sett-section">
+            <div class="sett-sec-title">Keamanan Akses</div>
+            <div class="sett-card">
+              <div class="sett-row"><div><div class="sett-row-lbl">Logout akun</div><div class="sett-row-sub">Keluar dari sesi aktif</div></div><button class="btn-sm" data-action="logout"><i class="fas fa-right-from-bracket"></i> Logout</button></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Ubah password</div><div class="sett-row-sub">Ganti password akun login</div></div><button class="btn-sm" data-action="change-password"><i class="fas fa-key"></i> Ubah Password</button></div>
+              <div class="sett-row"><div><div class="sett-row-lbl">Batas hak akses</div><div class="sett-row-sub">Atur menu yang boleh diakses user</div></div><button class="btn-sm" data-action="access-role"><i class="fas fa-user-shield"></i> Kelola Role</button></div>
+            </div>
+          </div>
+        </div>
+
         <div class="sett-panel" id="sett-sistem">
           <div class="sett-section">
             <div class="sett-sec-title">Tampilan</div>
@@ -1527,7 +1700,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
               </div>
               <div class="sett-row">
                 <div><div class="sett-row-lbl">Ekspor Backup</div><div class="sett-row-sub">Unduh semua data sebagai JSON</div></div>
-                <button class="btn-sm" onclick="eksporData()"><i class="fas fa-download"></i> Ekspor JSON</button>
+                <button class="btn-sm" data-action="export-data"><i class="fas fa-download"></i> Ekspor JSON</button>
               </div>
             </div>
           </div>
@@ -1551,7 +1724,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
 <!-- MODALS -->
 <div class="modal-bg" id="modalPersonil">
   <div class="modal">
-    <div class="modal-hdr"><div class="modal-title" id="modalPersonilTitle">Tambah Personil</div><button class="modal-close" onclick="closeModal('modalPersonil')"><i class="fas fa-xmark"></i></button></div>
+    <div class="modal-hdr"><div class="modal-title" id="modalPersonilTitle">Tambah Personil</div><button class="modal-close" data-action="close-modal" data-modal="modalPersonil"><i class="fas fa-xmark"></i></button></div>
     <div class="modal-body">
       <input type="hidden" id="editPersonilId" value="">
       <div class="form-row-2">
@@ -1571,13 +1744,13 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
         <select class="form-inp form-select" id="p-status"><option value="aktif">Aktif</option><option value="nonaktif">Non-aktif</option></select>
       </div>
     </div>
-    <div class="modal-foot"><button class="btn-sm" onclick="closeModal('modalPersonil')">Batal</button><button class="btn-primary" onclick="savePersonil()"><i class="fas fa-save"></i> Simpan</button></div>
+    <div class="modal-foot"><button class="btn-sm" data-action="close-modal" data-modal="modalPersonil">Batal</button><button class="btn-primary" data-action="save-personil"><i class="fas fa-save"></i> Simpan</button></div>
   </div>
 </div>
 
 <div class="modal-bg" id="modalUser">
   <div class="modal">
-    <div class="modal-hdr"><div class="modal-title" id="modalUserTitle">Tambah User</div><button class="modal-close" onclick="closeModal('modalUser')"><i class="fas fa-xmark"></i></button></div>
+    <div class="modal-hdr"><div class="modal-title" id="modalUserTitle">Tambah User</div><button class="modal-close" data-action="close-modal" data-modal="modalUser"><i class="fas fa-xmark"></i></button></div>
     <div class="modal-body">
       <input type="hidden" id="editUserId" value="">
       <div class="form-row-2">
@@ -1588,7 +1761,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
         <label class="form-lbl">Password <span id="passLabelNote" style="text-transform:none;font-weight:400;color:var(--dim)"></span></label>
         <div style="position:relative">
           <input class="form-inp" type="password" id="u-password" placeholder="Minimal 6 karakter" autocomplete="new-password" style="padding-right:42px">
-          <button class="eye-btn" onclick="toggleUserPass()" style="right:13px"><i class="fas fa-eye" id="uPassEye"></i></button>
+          <button class="eye-btn" data-action="toggle-user-pass" style="right:13px"><i class="fas fa-eye" id="uPassEye"></i></button>
         </div>
         <div class="form-hint" id="passHintEdit" style="display:none"><i class="fas fa-circle-info" style="color:var(--amber)"></i> Kosongkan jika tidak ingin mengubah password</div>
       </div>
@@ -1603,19 +1776,19 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
         <select class="form-inp form-select" id="u-status"><option value="aktif">Aktif</option><option value="nonaktif">Non-aktif</option></select>
       </div>
     </div>
-    <div class="modal-foot"><button class="btn-sm" onclick="closeModal('modalUser')">Batal</button><button class="btn-primary" onclick="saveUser()"><i class="fas fa-save"></i> Simpan</button></div>
+    <div class="modal-foot"><button class="btn-sm" data-action="close-modal" data-modal="modalUser">Batal</button><button class="btn-primary" data-action="save-user"><i class="fas fa-save"></i> Simpan</button></div>
   </div>
 </div>
 
 <div class="modal-bg" id="modalLapDetail">
   <div class="modal">
-    <div class="modal-hdr"><div class="modal-title" id="modalLapTitle">Detail Laporan</div><button class="modal-close" onclick="closeModal('modalLapDetail')"><i class="fas fa-xmark"></i></button></div>
+    <div class="modal-hdr"><div class="modal-title" id="modalLapTitle">Detail Laporan</div><button class="modal-close" data-action="close-modal" data-modal="modalLapDetail"><i class="fas fa-xmark"></i></button></div>
     <div class="modal-body">
       <div class="det-box" id="detLapBox"></div>
       <div class="det-acts">
-        <button class="btn-primary" onclick="kirimWAFromDetail()"><i class="fab fa-whatsapp"></i> Kirim WA</button>
-        <button class="btn-sm" onclick="salinDetail()"><i class="fas fa-copy"></i> Salin</button>
-        <button class="btn-sm btn-sm-red" onclick="confirmHapusLaporan()"><i class="fas fa-trash"></i> Hapus</button>
+        <button class="btn-primary" data-action="send-detail-wa"><i class="fab fa-whatsapp"></i> Kirim WA</button>
+        <button class="btn-sm" data-action="copy-detail"><i class="fas fa-copy"></i> Salin</button>
+        <button class="btn-sm btn-sm-red" data-action="delete-detail-report"><i class="fas fa-trash"></i> Hapus</button>
       </div>
     </div>
   </div>
@@ -1626,7 +1799,19 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); curs
     <div class="confirm-icon" id="confirmIcon"><i class="fas fa-exclamation-triangle"></i></div>
     <div class="confirm-title" id="confirmTitle">Konfirmasi</div>
     <div class="confirm-body" id="confirmBody">Apakah Anda yakin?</div>
-    <div class="confirm-btns"><button class="btn-cancel" onclick="closeModal('modalConfirm')">Batal</button><button class="btn-danger" id="confirmOkBtn">Ya, Lanjutkan</button></div>
+    <div class="confirm-btns"><button class="btn-cancel" data-action="close-modal" data-modal="modalConfirm">Batal</button><button class="btn-danger" id="confirmOkBtn">Ya, Lanjutkan</button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modalPassword">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title">Ubah Password</div><button class="modal-close" data-action="close-modal" data-modal="modalPassword"><i class="fas fa-xmark"></i></button></div>
+    <div class="modal-body">
+      <div class="form-grp"><label class="form-lbl">Password Lama</label><input class="form-inp" id="oldPass" type="password" placeholder="Masukkan password lama"></div>
+      <div class="form-grp"><label class="form-lbl">Password Baru</label><input class="form-inp" id="newPass" type="password" placeholder="Minimal 6 karakter"></div>
+      <div class="form-grp"><label class="form-lbl">Konfirmasi Password Baru</label><input class="form-inp" id="newPass2" type="password" placeholder="Ulangi password baru"></div>
+    </div>
+    <div class="modal-foot"><button class="btn-sm" data-action="close-modal" data-modal="modalPassword">Batal</button><button class="btn-primary" data-action="save-password"><i class="fas fa-save"></i> Simpan</button></div>
   </div>
 </div>
 
@@ -1653,12 +1838,13 @@ let laporan='', detailIdx=-1, detailId='', autosaveTimer=null;
 let currentUser=null;
 let isDark=true;
 let sidebarCollapsed=false;
-let db=null, fs=null;
+let firebaseDb=null, firebaseFs=null;
 let unsubArsip=null, unsubPersonil=null, unsubUsers=null;
 
 /* ===== FIREBASE ===== */
 function initFirebase(){
-  db=window._db; fs=window._fs;
+  firebaseDb=window._db;
+  firebaseFs=window._fs;
   setSyncStatus('ok','Firebase terhubung');
   loadFromFirebase();
 }
@@ -1676,21 +1862,41 @@ function setSyncStatus(type,msg){
 }
 
 async function fbSet(col,docId,data){
-  if(!db)return;
+  if(!firebaseDb || !firebaseFs) {
+    showNotif('Firebase belum siap, coba lagi sebentar.','red');
+    return false;
+  }
   setSyncStatus('ing','Menyimpan...');
-  try{await fs.setDoc(fs.doc(db,col,docId),{...data,updatedAt:fs.serverTimestamp()});setSyncStatus('ok','Tersimpan');}
-  catch(e){setSyncStatus('error','Gagal simpan: '+e.message);showNotif('Gagal simpan ke Firebase!','red');}
+  try{
+    await firebaseFs.setDoc(firebaseFs.doc(firebaseDb,col,docId),{...data,updatedAt:firebaseFs.serverTimestamp()});
+    setSyncStatus('ok','Tersimpan');
+    return true;
+  } catch(e){
+    setSyncStatus('error','Gagal simpan: '+e.message);
+    showNotif('Gagal simpan ke Firebase!','red');
+    return false;
+  }
 }
 async function fbDel(col,docId){
-  if(!db)return;
+  if(!firebaseDb || !firebaseFs) {
+    showNotif('Firebase belum siap, coba lagi sebentar.','red');
+    return false;
+  }
   setSyncStatus('ing','Menghapus...');
-  try{await fs.deleteDoc(fs.doc(db,col,docId));setSyncStatus('ok','Dihapus');}
-  catch(e){setSyncStatus('error','Gagal hapus');showNotif('Gagal hapus dari Firebase!','red');}
+  try{
+    await firebaseFs.deleteDoc(firebaseFs.doc(firebaseDb,col,docId));
+    setSyncStatus('ok','Dihapus');
+    return true;
+  } catch(e){
+    setSyncStatus('error','Gagal hapus');
+    showNotif('Gagal hapus dari Firebase!','red');
+    return false;
+  }
 }
 
 function loadFromFirebase(){
-  if(!db||!fs)return;
-  unsubArsip=fs.onSnapshot(fs.collection(db,'arsip'),snap=>{
+  if(!firebaseDb || !firebaseFs) return;
+  unsubArsip=firebaseFs.onSnapshot(firebaseFs.collection(firebaseDb,'arsip'),snap=>{
     arsip=[];snap.forEach(d=>arsip.push({...d.data(),_id:d.id}));
     arsip.sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));
     updateLapBadge();renderMiniChart();
@@ -1698,7 +1904,7 @@ function loadFromFirebase(){
     if(lapPage&&lapPage.classList.contains('active'))renderLaporan();
     updateSystemInfo();
   });
-  unsubPersonil=fs.onSnapshot(fs.collection(db,'personil'),snap=>{
+  unsubPersonil=firebaseFs.onSnapshot(firebaseFs.collection(firebaseDb,'personil'),snap=>{
     personilList=[];snap.forEach(d=>personilList.push({...d.data(),_id:d.id}));
     personilList.sort((a,b)=>(a.nama||'').localeCompare(b.nama||''));
     buildDatalist();
@@ -1706,7 +1912,7 @@ function loadFromFirebase(){
     if(persPage&&persPage.classList.contains('active'))renderPersonil();
     updateSystemInfo();
   });
-  unsubUsers=fs.onSnapshot(fs.collection(db,'users'),snap=>{
+  unsubUsers=firebaseFs.onSnapshot(firebaseFs.collection(firebaseDb,'users'),snap=>{
     appUsers=[];snap.forEach(d=>appUsers.push({...d.data(),_id:d.id}));
     if(!appUsers.length)seedDefaultUsers();
     const usersPage=document.getElementById('page-users');
@@ -1909,7 +2115,7 @@ function buildAutoReportRows(){
     const d=document.createElement('div');d.className='row-item row-item-auto';
     d.innerHTML=`<input type="text" class="row-input" value="${esc(kegiatan)}" oninput="onInputChange()">`
       +`<input type="text" class="row-input row-input-auto-pic" value="${esc(pic)}" oninput="onInputChange()">`
-      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+      +`<button class="del-btn" data-action="remove-row"><i class="fas fa-trash-can"></i></button>`;
     cont.appendChild(d);
   });
   updateStats();
@@ -1923,11 +2129,33 @@ function refreshAutoReportPic(){
   });
 }
 
+function getPersonilDatalistId(section){
+  const key=(section||'').toLowerCase();
+  if(['masuk','stanby-fe','fe'].includes(key)) return 'fe-datalist';
+  if(['patroli','stanby-patroli','tam','patrol','team-patroli'].includes(key)) return 'patroli-datalist';
+  return 'personil-datalist';
+}
+
 function buildDatalist(){
-  let dl=document.getElementById('personil-datalist');
-  if(!dl){dl=document.createElement('datalist');dl.id='personil-datalist';document.body.appendChild(dl);}
-  dl.innerHTML='';
-  personilList.filter(p=>p.status==='aktif'||!p.status).forEach(p=>{const o=document.createElement('option');o.value=p.nama;dl.appendChild(o);});
+  const active=personilList.filter(p=>p.status==='aktif'||!p.status);
+
+  const feDl=document.getElementById('fe-datalist')||document.createElement('datalist');
+  feDl.id='fe-datalist';
+  feDl.innerHTML='';
+  active.filter(p=>p.team==='Field Engineer').forEach(p=>{const o=document.createElement('option');o.value=p.nama;feDl.appendChild(o);});
+  if(!document.getElementById('fe-datalist')) document.body.appendChild(feDl);
+
+  const patDl=document.getElementById('patroli-datalist')||document.createElement('datalist');
+  patDl.id='patroli-datalist';
+  patDl.innerHTML='';
+  active.filter(p=>p.team==='Team Patroli').forEach(p=>{const o=document.createElement('option');o.value=p.nama;patDl.appendChild(o);});
+  if(!document.getElementById('patroli-datalist')) document.body.appendChild(patDl);
+
+  const allDl=document.getElementById('personil-datalist')||document.createElement('datalist');
+  allDl.id='personil-datalist';
+  allDl.innerHTML='';
+  active.forEach(p=>{const o=document.createElement('option');o.value=p.nama;allDl.appendChild(o);});
+  if(!document.getElementById('personil-datalist')) document.body.appendChild(allDl);
 }
 
 /* FIX #2: gunakan oninput (bukan onchange) agar PIC auto-update realtime saat mengetik */
@@ -1936,27 +2164,27 @@ function addRow(s,c1='',c2=''){
     const cont=document.getElementById('report-rows');const d=document.createElement('div');d.className='row-item';
     d.innerHTML=`<input type="text" class="row-input" placeholder="Kegiatan" value="${esc(c1)}" oninput="onInputChange()">`
       +`<input type="text" class="row-input" placeholder="PIC" value="${esc(c2)}" oninput="onInputChange()">`
-      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+      +`<button class="del-btn" data-action="remove-row"><i class="fas fa-trash-can"></i></button>`;
     cont.appendChild(d);updateStats();scheduleAutosave();return;
   }
   if(s==='off'){
     const cont=document.getElementById('off-rows');const d=document.createElement('div');d.className='row-item';
     d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()">`
       +`<input type="text" class="row-input" placeholder="Keterangan" value="${esc(c2)}" oninput="onInputChange()">`
-      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+      +`<button class="del-btn" data-action="remove-row"><i class="fas fa-trash-can"></i></button>`;
     cont.appendChild(d);updateStats();scheduleAutosave();return;
   }
   if(DROPDOWN_SECTIONS.includes(s)){
     const cont=document.getElementById(s+'-rows');const d=document.createElement('div');d.className='row-item';
     const opts=getLokasiBySection(s);
     const lokasiHTML=buildLokasiHTML(opts,c2);
-    /* FIX #2: oninput menggantikan onchange agar PIC di auto-report langsung berubah saat mengetik */
-    const extraAttr=(s==='masuk')?' oninput="onFENameChange(this)"':'';
-    d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="personil-datalist" oninput="onInputChange()"${extraAttr}>`
+    const listId=getPersonilDatalistId(s);
+    const extraAttr=(['masuk','stanby-fe'].includes(s))?' oninput="onFENameChange(this)"':' oninput="onInputChange()"';
+    d.innerHTML=`<input type="text" class="row-input" placeholder="Nama Personil" value="${esc(c1)}" list="${listId}" oninput="onInputChange()"${extraAttr}>`
       +`<select class="row-select" oninput="onInputChange()">${lokasiHTML}</select>`
-      +`<button class="del-btn" onclick="delRow(this)"><i class="fas fa-trash-can"></i></button>`;
+      +`<button class="del-btn" data-action="remove-row"><i class="fas fa-trash-can"></i></button>`;
     cont.appendChild(d);
-    if(s==='masuk')refreshAutoReportPic();
+    if(['masuk','stanby-fe'].includes(s))refreshAutoReportPic();
     updateStats();scheduleAutosave();
   }
 }
@@ -2021,8 +2249,31 @@ function renderMiniChart(){
   });
 }
 
+/* ===== VALIDATION ===== */
+function validateReportForm(){
+  const tgl=document.getElementById('tanggal')?.value?.trim();
+  if(!tgl){showNotif('Pilih tanggal laporan terlebih dahulu.','red');return false;}
+
+  const hasAnyData=[
+    ...getRows('masuk'),
+    ...getRows('stanby-fe'),
+    ...getRows('patroli'),
+    ...getRows('stanby-patroli'),
+    ...getRows('off'),
+    ...getAllReportRows()
+  ].some(r=>r.col1.trim() || r.col2.trim());
+
+  if(!hasAnyData){showNotif('Form laporan masih kosong, tambah data dulu.','red');return false;}
+
+  const reportRows=getAllReportRows().filter(r=>r.col1.trim());
+  if(!reportRows.length){showNotif('Tambahkan minimal satu kegiatan pada bagian report.','red');return false;}
+  return true;
+}
+
 /* ===== GENERATE ===== */
 async function generateLaporan(){
+  if(!validateReportForm()) return;
+
   const tgl=document.getElementById('tanggal').value;
   const tglStr=fmtDate(tgl)||'—';
   const judul=(settings.lapJudul||'UPDATE JADWAL HARIAN').toUpperCase();
@@ -2084,8 +2335,8 @@ async function generateLaporan(){
     createdBy:currentUser?.name||'',
     createdAt:new Date().toLocaleString('id-ID')
   };
-  await fbSet('arsip',docId,obj);
-  showNotif('Laporan tersimpan ke Firebase Cloud!','green');
+  const saved=await fbSet('arsip',docId,obj);
+  if(saved) showNotif('Laporan tersimpan ke Firebase Cloud!','green');
 }
 
 function renderPreview(txt){
@@ -2192,13 +2443,13 @@ function renderLaporan(){
   if(lapSortCol){data=[...data].sort((a,b)=>{let va=a[lapSortCol]||'',vb=b[lapSortCol]||'';return lapSortDir*(va<vb?-1:va>vb?1:0);});}
   const cont=document.getElementById('laporan-list');
   if(!data.length){cont.innerHTML='<div class="empty-state"><i class="fas fa-folder-open"></i><p>Belum ada laporan tersimpan</p><span>Generate laporan dari Dashboard terlebih dahulu</span></div>';return;}
-  cont.innerHTML='<table class="lap-table"><thead><tr><th onclick="sortLaporan(\'tgl\')">Tanggal</th><th>FE Masuk</th><th>Patroli</th><th>Off</th><th>Report</th><th>Dibuat oleh</th><th>Aksi</th></tr></thead><tbody>'
+  cont.innerHTML='<table class="lap-table"><thead><tr><th data-action="sort-laporan" data-col="tgl">Tanggal</th><th>FE Masuk</th><th>Patroli</th><th>Off</th><th>Report</th><th>Dibuat oleh</th><th>Aksi</th></tr></thead><tbody>'
     +data.map(a=>{
       const m=(a.masuk||[]).filter(r=>r.col1).length;
       const p=(a.patroli||[]).filter(r=>r.col1).length;
       const o=(a.off||[]).filter(r=>r.col1).length;
       const r=(a.report||[]).filter(r=>r.col1).length;
-      return `<tr><td><strong>${a.tglStr}</strong></td><td><span class="badge badge-g">${m} org</span></td><td><span class="badge badge-c">${p} org</span></td><td><span class="badge badge-r">${o} org</span></td><td><span class="badge badge-a">${r} keg</span></td><td style="color:var(--muted);font-size:11px">${a.createdBy||'-'}</td><td><div class="td-act"><button class="btn-sm" onclick="detailLaporan('${a._id}')"><i class="fas fa-eye"></i> Lihat</button><button class="btn-sm" onclick="muatLaporan('${a._id}')"><i class="fas fa-pen"></i> Edit</button><button class="btn-sm btn-sm-red" onclick="confirmHapusLaporanDirect('${a._id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
+      return `<tr><td><strong>${a.tglStr}</strong></td><td><span class="badge badge-g">${m} org</span></td><td><span class="badge badge-c">${p} org</span></td><td><span class="badge badge-r">${o} org</span></td><td><span class="badge badge-a">${r} keg</span></td><td style="color:var(--muted);font-size:11px">${a.createdBy||'-'}</td><td><div class="td-act"><button class="btn-sm" data-action="open-detail" data-id="${a._id}"><i class="fas fa-eye"></i> Lihat</button><button class="btn-sm" data-action="edit-laporan" data-id="${a._id}"><i class="fas fa-pen"></i> Edit</button><button class="btn-sm btn-sm-red" data-action="delete-laporan" data-id="${a._id}"><i class="fas fa-trash"></i></button></div></td></tr>`;
     }).join('')+'</tbody></table>';
 }
 function sortLaporan(col){if(lapSortCol===col)lapSortDir*=-1;else{lapSortCol=col;lapSortDir=1;}renderLaporan();}
@@ -2248,7 +2499,7 @@ function renderPersonil(){
   cont.innerHTML=data.map(p=>{
     const col=getColor(p.nama);const ini=getInitial(p.nama);
     const tc=p.team==='Field Engineer'?'badge-b':'badge-c';
-    return `<div class="personil-card"><div class="pc-top"><div class="pc-avatar" style="background:${col}">${ini}</div><div><div class="pc-name">${p.nama}</div><div class="pc-team"><span class="badge ${tc}">${p.team||'—'}</span></div></div></div><div class="pc-info">${p.hp?`<div class="pc-row"><i class="fas fa-phone"></i>${p.hp}</div>`:''}<div class="pc-row"><i class="fas fa-location-dot"></i>${p.lokasi||'—'}</div><div class="pc-row"><i class="fas fa-circle" style="color:${p.status==='aktif'?'var(--green)':'var(--red)'};font-size:7px"></i><span class="badge ${p.status==='aktif'?'badge-g':'badge-r'}">${p.status==='aktif'?'Aktif':'Non-aktif'}</span></div></div><div class="pc-foot"><button class="btn-sm" style="flex:1" onclick="openPersonilModal('${p._id||''}')"><i class="fas fa-pen"></i> Edit</button><button class="btn-sm btn-sm-red" onclick="confirmHapusPersonil('${p._id||''}','${p.nama}')"><i class="fas fa-trash"></i></button></div></div>`;
+    return `<div class="personil-card"><div class="pc-top"><div class="pc-avatar" style="background:${col}">${ini}</div><div><div class="pc-name">${p.nama}</div><div class="pc-team"><span class="badge ${tc}">${p.team||'—'}</span></div></div></div><div class="pc-info">${p.hp?`<div class="pc-row"><i class="fas fa-phone"></i>${p.hp}</div>`:''}<div class="pc-row"><i class="fas fa-location-dot"></i>${p.lokasi||'—'}</div><div class="pc-row"><i class="fas fa-circle" style="color:${p.status==='aktif'?'var(--green)':'var(--red)'};font-size:7px"></i><span class="badge ${p.status==='aktif'?'badge-g':'badge-r'}">${p.status==='aktif'?'Aktif':'Non-aktif'}</span></div></div><div class="pc-foot"><button class="btn-sm" style="flex:1" data-action="open-personil" data-id="${p._id||''}"><i class="fas fa-pen"></i> Edit</button><button class="btn-sm btn-sm-red" data-action="delete-personil" data-id="${p._id||''}" data-name="${p.nama}"><i class="fas fa-trash"></i></button></div></div>`;
   }).join('');
 }
 
@@ -2300,7 +2551,7 @@ function renderUsers(){
       <div class="user-card-top"><div class="user-ava" style="background:${col};color:#000">${ini}</div><div><div class="user-name">${u.name}</div><div class="user-uname"><i class="fas fa-at" style="font-size:9px;color:var(--dim)"></i> ${u.username}</div></div></div>
       <div class="user-info-row"><i class="fas fa-user-tag"></i><span class="badge ${roleBadge}">${u.role}</span></div>
       <div class="user-info-row"><i class="fas fa-circle" style="font-size:7px;color:${u.status==='aktif'?'var(--green)':'var(--red)'}"></i><span class="badge ${u.status==='aktif'?'badge-g':'badge-r'}">${u.status==='aktif'?'Aktif':'Non-aktif'}</span></div>
-      <div class="user-foot"><button class="btn-sm" style="flex:1" onclick="openUserModal('${u._id||u.username}')"><i class="fas fa-pen"></i> Edit</button>${canDelete?`<button class="btn-sm btn-sm-red" onclick="confirmHapusUser('${u._id||u.username}','${u.name}')"><i class="fas fa-trash"></i></button>`:'<button class="btn-sm" disabled style="opacity:.4"><i class="fas fa-lock"></i></button>'}</div>
+      <div class="user-foot"><button class="btn-sm" style="flex:1" data-action="open-user" data-id="${u._id||u.username}"><i class="fas fa-pen"></i> Edit</button>${canDelete?`<button class="btn-sm btn-sm-red" data-action="delete-user" data-id="${u._id||u.username}" data-name="${u.name}"><i class="fas fa-trash"></i></button>`:'<button class="btn-sm" disabled style="opacity:.4"><i class="fas fa-lock"></i></button>'}</div>
     </div>`;
   }).join('');
 }
@@ -2377,6 +2628,43 @@ function eksporData(){
   const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='jadwal-backup-'+getToday()+'.json';a.click();URL.revokeObjectURL(url);
   showNotif('Data berhasil diekspor!','green');
 }
+function importData(){
+  const input=document.createElement('input');input.type='file';input.accept='application/json';
+  input.onchange=async()=>{
+    const file=input.files&&input.files[0];if(!file){return;}
+    try{const text=await file.text();const data=JSON.parse(text);if(data.arsip)arsip=data.arsip; if(data.personilList)personilList=data.personilList; if(data.appUsers)appUsers=data.appUsers; showNotif('Backup berhasil diimpor!','green'); updateSystemInfo(); renderLaporan(); renderPersonil();}catch(e){showNotif('File backup tidak valid!','red');}
+  };
+  input.click();
+}
+function clearDraft(){
+  localStorage.removeItem('draft');
+  document.querySelectorAll('.row-item').forEach(r=>r.remove());
+  updateStats();showNotif('Draft lokal berhasil dibersihkan!','amber');
+}
+function openPasswordModal(){
+  document.getElementById('oldPass').value='';
+  document.getElementById('newPass').value='';
+  document.getElementById('newPass2').value='';
+  openModal('modalPassword');
+}
+async function savePasswordFromModal(){
+  const current=(document.getElementById('oldPass').value||'').trim();
+  const next=(document.getElementById('newPass').value||'').trim();
+  const confirm=(document.getElementById('newPass2').value||'').trim();
+  if(!current||!next||!confirm){showNotif('Semua kolom wajib diisi!','red');return;}
+  if(next.length<6){showNotif('Password baru minimal 6 karakter!','red');return;}
+  if(next!==confirm){showNotif('Konfirmasi password tidak cocok!','red');return;}
+  const user=appUsers.find(u=>u.username===currentUser?.username && u.password===current);
+  if(!user){showNotif('Password lama salah!','red');return;}
+  user.password=next;
+  await fbSet('users',user._id||user.username,user);
+  closeModal('modalPassword');
+  showNotif('Password berhasil diubah!','green');
+}
+function changePassword(){ openPasswordModal(); }
+function accessRole(){
+  showNotif('Fitur role akan dikembangkan pada versi berikutnya.','blue');
+}
 
 /* ===== MODAL ===== */
 function openModal(id){document.getElementById(id).classList.add('open');}
@@ -2404,6 +2692,49 @@ function showNotif(msg,type='green'){
   ico.querySelector('i').className=icons[type];document.getElementById('notif-text').textContent=msg;
   n.classList.add('show');if(notifTimer)clearTimeout(notifTimer);notifTimer=setTimeout(()=>n.classList.remove('show'),2800);
 }
+
+/* ===== UI EVENT DELEGATION ===== */
+function handleDelegatedClick(event){
+  const btn=event.target.closest('[data-action]');
+  if(!btn) return;
+
+  const action=btn.dataset.action;
+  if(action==='page'){ return goPage(btn.dataset.page, document.getElementById('nav-'+btn.dataset.page)); }
+  if(action==='sett'){ return goSett(btn.dataset.tab, btn); }
+  if(action==='toggle-theme'){ return toggleTheme(); }
+  if(action==='toggle-pass'){ return togglePass(); }
+  if(action==='toggle-user-pass'){ return toggleUserPass(); }
+  if(action==='login'){ return doLogin(); }
+  if(action==='logout'){ return confirmLogout(); }
+  if(action==='toggle-sidebar'){ return toggleSidebar(); }
+  if(action==='close-sidebar'){ return closeMobileSidebar(); }
+  if(action==='remove-row'){ return delRow(btn.closest('.row-item')); }
+  if(action==='open-modal'){ return openModal(btn.dataset.modal); }
+  if(action==='close-modal'){ return closeModal(btn.dataset.modal); }
+  if(action==='add-row'){ return addRow(btn.dataset.section); }
+  if(action==='generate-report'){ return generateLaporan(); }
+  if(action==='reset-form'){ return confirmReset(); }
+  if(action==='send-wa'){ return kirimWA(); }
+  if(action==='copy-report'){ return salinClipboard(); }
+  if(action==='save-personil'){ return savePersonil(); }
+  if(action==='save-user'){ return saveUser(); }
+  if(action==='save-password'){ return savePasswordFromModal(); }
+  if(action==='open-personil'){ return openPersonilModal(btn.dataset.id||''); }
+  if(action==='open-user'){ return openUserModal(btn.dataset.id||''); }
+  if(action==='open-detail'){ return detailLaporan(btn.dataset.id||''); }
+  if(action==='edit-laporan'){ return muatLaporan(btn.dataset.id||''); }
+  if(action==='delete-laporan'){ return confirmHapusLaporanDirect(btn.dataset.id||''); }
+  if(action==='delete-personil'){ return confirmHapusPersonil(btn.dataset.id||'', btn.dataset.name||''); }
+  if(action==='delete-user'){ return confirmHapusUser(btn.dataset.id||'', btn.dataset.name||''); }
+  if(action==='sort-laporan'){ return sortLaporan(btn.dataset.col); }
+  if(action==='clear-lap-filter'){ return clearLapFilter(); }
+  if(action==='change-password'){ return changePassword(); }
+  if(action==='export-data'){ return eksporData(); }
+  if(action==='import-data'){ return importData(); }
+  if(action==='clear-draft'){ return clearDraft(); }
+  if(action==='access-role'){ return accessRole(); }
+}
+document.addEventListener('click', handleDelegatedClick);
 
 /* ===== INIT ===== */
 onTeamChange();
